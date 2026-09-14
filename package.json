@@ -1,0 +1,30 @@
+{
+  "name": "tpi-metolodogias-agiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "vitest",
+    "at": "bddgen && playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tomas-Wardoloff/TPI-metolodogias-agiles.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Tomas-Wardoloff/TPI-metolodogias-agiles/issues"
+  },
+  "homepage": "https://github.com/Tomas-Wardoloff/TPI-metolodogias-agiles#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.5.1",
+    "playwright-bdd": "^9.2.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
+  }
+}
