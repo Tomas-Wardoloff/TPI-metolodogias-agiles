@@ -22,3 +22,9 @@ it("revela las dos R de PERRO", () => {
   juego.adivinar("R");
   expect(juego.palabraEnmascarada()).toBe("_ _ R R _");
 });
+
+it("una letra ausente deja la mascara igual", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  expect(juego.palabraEnmascarada()).toBe("_ _ _ _");
+});
