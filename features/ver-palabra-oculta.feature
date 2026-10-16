@@ -9,9 +9,8 @@ Característica: Ver palabra oculta
   Esquema del escenario: La palabra se muestra con un guion por letra
     Dado una partida con la palabra "<palabra>"
     Entonces se ve la palabra "<mascara>"
-    Y se ven <intentos> intentos
 
     Ejemplos:
-      | palabra | mascara   | intentos |
-      | GATO    |       | 6        |
-      | PERRO   |     _ | 6        |
+      | palabra | mascara   |
+      | GATO    |_ _ _ _|
+      | PERRO   |_ _ _ _ _|

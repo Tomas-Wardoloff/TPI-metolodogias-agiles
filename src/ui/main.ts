@@ -15,3 +15,13 @@ export function mountApp(root: HTMLElement): void {
     boton.remove();
   });
 }
+
+import { Ahorcado } from "../domain/Ahorcado";
+
+export function mountGame(root: HTMLElement, palabra: string): void {
+  const juego = new Ahorcado(palabra);
+  root.innerHTML = 
+    `<p data-testid="word"></p>`;
+  root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
+    juego.palabraEnmascarada();
+}
