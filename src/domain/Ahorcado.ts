@@ -7,4 +7,6 @@ export class Ahorcado {
       .map(() => "_")
       .join(" ");
   }
+
+  adivinar(_letra: string): void {}
 }
