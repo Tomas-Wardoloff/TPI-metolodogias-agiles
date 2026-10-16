@@ -1,3 +1,5 @@
+import { Ahorcado } from "../domain/Ahorcado";
+
 export function mountApp(root: HTMLElement): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
@@ -16,12 +18,24 @@ export function mountApp(root: HTMLElement): void {
   });
 }
 
-import { Ahorcado } from "../domain/Ahorcado";
-
 export function mountGame(root: HTMLElement, palabra: string): void {
   const juego = new Ahorcado(palabra);
-  root.innerHTML = 
-    `<p data-testid="word"></p>`;
-  root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
-    juego.palabraEnmascarada();
+
+  const dibujar = () => {
+    root.innerHTML = `
+      <p data-testid="word"></p>
+      <input type="text" />
+    `;
+
+    root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
+      juego.palabraEnmascarada();
+    const input = root.querySelector("input")!;
+    input.addEventListener("keydown", (evento) => {
+      if (evento.key !== "Enter") return;
+      juego.adivinar(input.value);
+      dibujar();
+    });
+  };
+
+  dibujar();
 }
