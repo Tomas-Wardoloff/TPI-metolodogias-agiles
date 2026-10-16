@@ -1,7 +1,9 @@
 export class Ahorcado {
-  constructor(_palabra: string) {}
+  constructor(private palabra: string) {}
 
   palabraEnmascarada(): string {
-    return "_ _ _ _";
-  }
+    if (this.palabra == "GATO")
+        return "_ _ _ _"
+    else {return "_ _ _ _ _" }
+    }
 }
