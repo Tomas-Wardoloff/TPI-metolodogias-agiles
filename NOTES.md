@@ -26,3 +26,13 @@ Regla de validez: solo letras (con acentos y ñ), espacios y guiones.
 rojo" (Guía §2.1). CA-3 no tiene lógica de negocio: la UI toma el valor del
 input y lo muestra. El objeto de dominio aparece en CA-2, donde hay que decidir
 si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
+
+## HU-J1 — Ver palabra oculta
+
+> Como jugador quiero ver la palabra con guiones por cada letra, para saber qué tan larga es.
+
+| Criterio                                      | Escenario (AT)                 | Unit Tests                                      | Estado |
+| --------------------------------------------- | ------------------------------ | ----------------------------------------------- | ------ |
+| CA-1 — GATO se ve _ _ _ _ , PERRO se ve     _ _ _ _ _| ver-palabra-oculta.feature | enmascara GATO; enmascara PERRO | verde  |
+
+---
