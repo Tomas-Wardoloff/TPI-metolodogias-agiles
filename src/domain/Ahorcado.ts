@@ -2,6 +2,6 @@ export class Ahorcado {
   constructor(_palabra: string) {}
 
   palabraEnmascarada(): string {
-    return "";
+    return "_ _ _ _";
   }
 }
