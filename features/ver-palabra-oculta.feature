@@ -10,7 +10,7 @@ Característica: Ver palabra oculta
     Dado una partida con la palabra "<palabra>"
     Entonces se ve la palabra "<mascara>"
 
-    Ejemplos:
+Ejemplos:
       | palabra | mascara   |
-      | GATO    |_ _ _ _|
-      | PERRO   |_ _ _ _ _|
+      | GATO    | _ _ _ _   |
+      | PERRO   | _ _ _ _ _ |
