@@ -1,5 +1,5 @@
 # language: es
-@HU-J1 @HU-J3
+@HU-J1 
 Característica: Ver palabra oculta
   Como jugador
   quiero ver la palabra con guiones por cada letra
