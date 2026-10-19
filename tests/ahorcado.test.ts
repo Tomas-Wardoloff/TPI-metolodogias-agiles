@@ -28,3 +28,20 @@ it("una letra ausente deja la mascara igual", () => {
   juego.adivinar("X");
   expect(juego.palabraEnmascarada()).toBe("_ _ _ _");
 });
+
+it("comienza con 6 intentos", () => {
+  const juego = new Ahorcado("GATO");
+  expect(juego.intentosRestantes()).toBe(6);
+});
+
+it("resta un intento si la letra es incorrecta", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  expect(juego.intentosRestantes()).toBe(5);
+});
+
+it("no resta intentos si la letra es correcta", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("A");
+  expect(juego.intentosRestantes()).toBe(6);
+});

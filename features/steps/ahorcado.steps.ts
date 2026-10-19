@@ -17,3 +17,6 @@ Then("se ve la palabra {string}", async ({ page }, esperada: string) => {
   await expect(page.getByTestId("word")).toHaveText(esperada);
 });
 
+Then("se ven {int} intentos restantes", async ({ page }, intentos: number) => {
+  await expect(page.getByTestId("intentos")).toHaveText(intentos.toString());
+});
