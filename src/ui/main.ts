@@ -23,12 +23,14 @@ export function mountGame(root: HTMLElement, palabra: string): void {
 
   const dibujar = () => {
     root.innerHTML = `
+      <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="word"></p>
       <input type="text" />
     `;
 
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
       juego.palabraEnmascarada();
+    
     const input = root.querySelector("input")!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
