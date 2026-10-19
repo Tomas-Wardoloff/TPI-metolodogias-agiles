@@ -44,5 +44,15 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | CA-1 — Letra en palabra → se revela                | `ingresar-letra.feature`   | revela A en GATO, R en PERRO | verde  |
 | CA-2 — Letra ausente → máscara queda igual         | `ingresar-letra.feature`   | X en GATO deja _ _ _ _       | verde  |
 
+## HU-J3 — Ver intentos restantes
+
+> Como jugador quiero ver cuántos intentos me quedan, para decidir mi estrategia.
+
+| Criterio                                           | Escenario (AT)             | Unit Tests                   | Estado |
+| -------------------------------------------------- | -------------------------- | ---------------------------- | ------ |
+| CA-1 — Inicio de partida → 6 intentos              | `ver-intentos.feature`     | comienza con 6 intentos      | verde  |
+| CA-2 — Letra incorrecta → resta un intento         | `ver-intentos.feature`     | resta si es incorrecta       | verde  |
+| CA-3 — Letra correcta → no resta intentos          | `ver-intentos.feature`     | no resta si es correcta      | verde  |
+
 
 ---
