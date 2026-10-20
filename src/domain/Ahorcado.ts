@@ -32,7 +32,6 @@ export class Ahorcado {
   }
 
   perdida(): boolean {
-    return this.palabra.toUpperCase() === "GATO" && this.intentosRestantes() === 0;
+    return this.intentosRestantes() === 0;
   }
-
 }
