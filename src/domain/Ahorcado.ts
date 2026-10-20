@@ -14,7 +14,7 @@ export class Ahorcado {
   }
 
   palabraEnmascarada(): string {
-    if (this.perdida() && this.palabra.toUpperCase() === "GATO") return "GATO";
+    if (this.perdida()) return this.palabra.toUpperCase();
     return this.palabra
       .split("")
       .map((letra) => (this.acertadas.has(letra.toUpperCase()) ? letra.toUpperCase() : "_"))
