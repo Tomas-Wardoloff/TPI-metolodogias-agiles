@@ -1,6 +1,6 @@
 import { Ahorcado } from "../domain/Ahorcado";
 
-export function mountApp(root: HTMLElement): void {
+export function mountApp(root: HTMLElement, palabra: string): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
     <button>Continuar</button>
@@ -15,6 +15,9 @@ export function mountApp(root: HTMLElement): void {
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
     boton.remove();
+    const tablero = document.createElement("div");
+    root.appendChild(tablero);
+    mountGame(tablero, palabra);
   });
 }
 

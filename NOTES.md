@@ -21,6 +21,7 @@ Regla de validez: solo letras (con acentos y ñ), espacios y guiones.
 | CA-1 — nombre vacío → aviso, no avanza             | fuera de este corte       | —            | fuera de este corte |
 | CA-2 — caracteres no permitidos → aviso, no avanza | fuera de este corte       | —            | fuera de este corte |
 | CA-3 — nombre válido → ve su nombre en pantalla    | `ingresar-nombre.feature` | — (ver nota) | verde               |
+| CA-4 — al confirmar empieza la partida y la URL no muestra la palabra | `ingresar-nombre.feature` | — | verde               |
 
 **Nota sobre CA-3 (sin unit tests):** decidimos seguir el camino "bancar el AT
 rojo" (Guía §2.1). CA-3 no tiene lógica de negocio: la UI toma el valor del
