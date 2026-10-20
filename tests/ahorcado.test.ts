@@ -17,6 +17,12 @@ it("revela la A de GATO", () => {
   expect(juego.palabraEnmascarada()).toBe("_ A _ _");
 });
 
+it("la a minuscula revela la A de GATO", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("a");
+  expect(juego.palabraEnmascarada()).toBe("_ A _ _");
+});
+
 it("revela las dos R de PERRO", () => {
   const juego = new Ahorcado("PERRO");
   juego.adivinar("R");
