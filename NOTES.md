@@ -55,5 +55,13 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | CA-2 — Letra incorrecta → resta un intento         | `ver-intentos.feature`     | resta si es incorrecta       | verde  |
 | CA-3 — Letra correcta → no resta intentos          | `ver-intentos.feature`     | no resta si es correcta      | verde  |
 
+## HU-J7 — Ganar la partida
+
+> Como jugador quiero completar la palabra para ver que gané.
+
+| Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
+| --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
+| CA-1 — al revelar todas las letras se ve GANASTE | `ganar.feature` | completar GATO; completar ALA      | verde  |
+
 
 ---

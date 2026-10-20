@@ -25,9 +25,11 @@ export function mountGame(root: HTMLElement, palabra: string): void {
   const juego = new Ahorcado(palabra);
 
   const dibujar = () => {
+    const estado = juego.ganada() ? `<p data-testid="status">GANASTE</p>` : "";
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="word"></p>
+      ${estado}
       <input type="text" />
     `;
 
