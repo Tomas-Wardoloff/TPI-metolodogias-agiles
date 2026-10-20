@@ -54,3 +54,10 @@ it("completar GATO gana", () => {
   juego.adivinar("O");
   expect(juego.ganada()).toBe(true);
 });
+
+it("completar ALA con A y L gana", () => {
+  const juego = new Ahorcado("ALA");
+  juego.adivinar("A");
+  juego.adivinar("L");
+  expect(juego.ganada()).toBe(true);
+});
