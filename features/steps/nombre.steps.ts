@@ -18,3 +18,11 @@ When("confirma", async ({ page }) => {
 Then("ve el saludo {string}", async ({ page }, saludo: string) => {
   await expect(page.getByTestId("saludo")).toHaveText(saludo);
 });
+
+Then("ve una palabra oculta", async ({ page }) => {
+  await expect(page.getByTestId("word")).toHaveText(/^(_( _)*)$/);
+});
+
+Then("la dirección no contiene {string}", async ({ page }, texto: string) => {
+  expect(page.url()).not.toContain(texto);
+});
