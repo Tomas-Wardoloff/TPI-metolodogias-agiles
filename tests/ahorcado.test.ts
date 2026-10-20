@@ -67,3 +67,9 @@ it("completar ALA con A y L gana", () => {
   juego.adivinar("L");
   expect(juego.ganada()).toBe(true);
 });
+
+it("el sexto fallo pierde", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.perdida()).toBe(true);
+});

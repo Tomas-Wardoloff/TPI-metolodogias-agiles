@@ -30,4 +30,9 @@ export class Ahorcado {
       .split("")
       .every((letra) => this.acertadas.has(letra));
   }
+
+  perdida(): boolean {
+    return false;
+  }
+
 }
