@@ -10,17 +10,17 @@ Story Map: https://miro.com/app/board/uXjVHsffG1k=/
 
 ---
 
-## HU-IN1 — Ingresar nombre
+## HU-RI1 — Ingresar nombre
 
 > Como jugador quiero ingresar mi nombre para poder jugar.
 
 Regla de validez: solo letras (con acentos y ñ), espacios y guiones.
 
-| Criterio                                           | Escenario (AT)            | Unit Tests   | Estado |
-| -------------------------------------------------- | ------------------------- | ------------ | ------ |
-| CA-1 — nombre vacío → aviso, no avanza             | pendiente                 | pendiente    | 🔴     |
-| CA-2 — caracteres no permitidos → aviso, no avanza | pendiente                 | pendiente    | 🔴     |
-| CA-3 — nombre válido → ve su nombre en pantalla    | `ingresar-nombre.feature` | — (ver nota) | 🔴     |
+| Criterio                                           | Escenario (AT)            | Unit Tests   | Estado              |
+| -------------------------------------------------- | ------------------------- | ------------ | ------------------- |
+| CA-1 — nombre vacío → aviso, no avanza             | fuera de este corte       | —            | fuera de este corte |
+| CA-2 — caracteres no permitidos → aviso, no avanza | fuera de este corte       | —            | fuera de este corte |
+| CA-3 — nombre válido → ve su nombre en pantalla    | `ingresar-nombre.feature` | — (ver nota) | verde               |
 
 **Nota sobre CA-3 (sin unit tests):** decidimos seguir el camino "bancar el AT
 rojo" (Guía §2.1). CA-3 no tiene lógica de negocio: la UI toma el valor del

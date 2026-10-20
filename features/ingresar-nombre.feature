@@ -1,5 +1,5 @@
 # language: es
-@HU-IN1
+@HU-RI1
 Característica: Ingresar nombre
   Como jugador
   quiero ingresar mi nombre
