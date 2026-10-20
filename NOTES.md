@@ -70,6 +70,7 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
 | CA-1 — al sexto fallo se ve PERDISTE          | `perder.feature`   | el sexto fallo pierde              | verde  |
+| CA-2 — al perder se ve la palabra             | `perder.feature`   | al perder la palabra queda revelada; al perder PERRO queda revelada | verde  |
 
 
 ---
