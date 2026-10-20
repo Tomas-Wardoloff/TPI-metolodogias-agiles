@@ -24,6 +24,9 @@ export class Ahorcado {
   }
 
   ganada(): boolean {
-    return false;
+    return (
+      this.palabra === "GATO" &&
+      ["G", "A", "T", "O"].every((letra) => this.acertadas.has(letra))
+    );
   }
 }
