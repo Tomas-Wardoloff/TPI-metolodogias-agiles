@@ -73,3 +73,9 @@ it("el sexto fallo pierde", () => {
   for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
   expect(juego.perdida()).toBe(true);
 });
+
+it("el sexto fallo de PERRO pierde", () => {
+  const juego = new Ahorcado("PERRO");
+  for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.perdida()).toBe(true);
+});
