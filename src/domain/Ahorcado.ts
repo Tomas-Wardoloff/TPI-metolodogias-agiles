@@ -22,4 +22,8 @@ export class Ahorcado {
   intentosRestantes(): number {
     return this.intentos;
   }
+
+  ganada(): boolean {
+    return false;
+  }
 }

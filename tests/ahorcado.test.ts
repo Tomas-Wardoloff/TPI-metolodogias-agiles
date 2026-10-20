@@ -45,3 +45,12 @@ it("no resta intentos si la letra es correcta", () => {
   juego.adivinar("A");
   expect(juego.intentosRestantes()).toBe(6);
 });
+
+it("completar GATO gana", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  expect(juego.ganada()).toBe(true);
+});
