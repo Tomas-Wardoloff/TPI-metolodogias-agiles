@@ -63,5 +63,13 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
 | CA-1 — al revelar todas las letras se ve GANASTE | `ganar.feature` | completar GATO; completar ALA      | verde  |
 
+## HU-J8 — Perder la partida
+
+> Como jugador quiero agotar los intentos para saber que perdí.
+
+| Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
+| --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
+| CA-1 — al sexto fallo se ve PERDISTE          | `perder.feature`   | el sexto fallo pierde              | verde  |
+
 
 ---
