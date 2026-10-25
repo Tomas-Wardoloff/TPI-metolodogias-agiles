@@ -9,3 +9,10 @@ Característica: Ver letras intentadas
   Escenario: Al empezar no hay letras intentadas
     Dado una partida con la palabra "GATO"
     Entonces no se ven letras intentadas
+
+  @CA-2
+  Escenario: Se ven las letras ingresadas en el orden en que se ingresaron
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "A"
+    Y ingresa la letra "X"
+    Entonces se ven las letras intentadas "A X"
