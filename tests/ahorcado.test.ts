@@ -103,3 +103,10 @@ it("GATO con A y X solo tiene incorrecta la X", () => {
   juego.adivinar("X");
   expect(juego.letrasIncorrectas()).toEqual(["X"]);
 });
+
+it("GATO con X dos veces tiene incorrecta una sola X", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("X");
+  expect(juego.letrasIncorrectas()).toEqual(["X"]);
+});
