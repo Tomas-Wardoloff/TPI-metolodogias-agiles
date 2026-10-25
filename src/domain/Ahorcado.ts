@@ -1,11 +1,13 @@
 export class Ahorcado {
   private acertadas = new Set<string>();
   private intentos = 6;
+  private intentadas: string[] = [];
 
   constructor(private palabra: string) {}
 
   adivinar(letra: string): void {
     const normalizada = letra.toUpperCase();
+    this.intentadas.push(normalizada);
     if (this.palabra.toUpperCase().includes(normalizada)) {
       this.acertadas.add(normalizada);
     } else {
@@ -37,6 +39,6 @@ export class Ahorcado {
   }
 
   letrasIntentadas(): string[] {
-    return [];
+    return this.intentadas;
   }
 }
