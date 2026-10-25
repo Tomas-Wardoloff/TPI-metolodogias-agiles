@@ -10,7 +10,7 @@ export class Ahorcado {
     if (this.palabra.toUpperCase().includes(normalizada)) {
       this.acertadas.add(normalizada);
     } else {
-      this.incorrectas.push(normalizada);
+      if (!this.incorrectas.includes(normalizada)) this.incorrectas.push(normalizada);
       this.intentos--;
     }
   }
