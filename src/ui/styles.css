@@ -1,0 +1,198 @@
+:root {
+  --fondo-1: #6366f1;
+  --fondo-2: #ec4899;
+  --tarjeta: #ffffff;
+  --texto: #1f2937;
+  --suave: #6b7280;
+  --primario: #6366f1;
+  --verde: #16a34a;
+  --rojo: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Fredoka", sans-serif;
+  color: var(--texto);
+  background: linear-gradient(135deg, var(--fondo-1), var(--fondo-2));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.titulo {
+  color: white;
+  font-size: 2.8rem;
+  margin: 40px 0 20px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#app {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 24px;
+  background: var(--tarjeta);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: aparecer 0.4s ease-out;
+}
+
+/* Saludo */
+[data-testid="saludo"] {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primario);
+  margin: 0;
+}
+
+[data-testid="saludo"]:empty {
+  display: none;
+}
+
+/* Intentos: la etiqueta y el corazón se agregan con CSS,
+   así el texto del elemento sigue siendo solo el número */
+[data-testid="intentos"] {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #fef2f2;
+  color: var(--rojo);
+  font-weight: 600;
+}
+
+[data-testid="intentos"]::before {
+  content: "❤️ Intentos: ";
+}
+
+/* Palabra oculta */
+[data-testid="word"] {
+  font-family: "Space Mono", monospace;
+  font-size: 2.6rem;
+  letter-spacing: 0.35em;
+  margin: 24px 0;
+  word-break: break-all;
+}
+
+/* Estado (GANASTE) */
+[data-testid="status"] {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+[data-testid="status"].ganaste {
+  color: var(--verde);
+  animation: rebote 0.6s ease;
+}
+
+[data-testid="status"].ganaste::before {
+  content: "🎉 ";
+}
+
+[data-testid="status"].perdiste {
+  color: var(--rojo);
+  animation: temblor 0.5s ease;
+}
+
+[data-testid="status"].perdiste::before {
+  content: "💀 ";
+}
+
+@keyframes temblor {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  max-width: 240px;
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: var(--primario);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+/* Botón */
+button {
+  display: block;
+  margin: 16px auto 0;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primario);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+button:hover {
+  background: #4f46e5;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* Animaciones */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rebote {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Instrucciones */
+.instrucciones {
+  max-width: 420px;
+  margin: 0 0 24px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 32px 0 16px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.footer p {
+  margin: 4px 0;
+}
