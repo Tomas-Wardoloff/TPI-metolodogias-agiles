@@ -97,9 +97,9 @@ it("al empezar no hay letras intentadas", () => {
   expect(juego.letrasIntentadas()).toEqual([]);
 });
 
-it("GATO con A y X tiene intentadas A y X", () => {
+it("GATO con A y X solo tiene incorrecta la X", () => {
   const juego = new Ahorcado("GATO");
   juego.adivinar("A");
   juego.adivinar("X");
-  expect(juego.letrasIntentadas()).toEqual(["A", "X"]);
+  expect(juego.letrasIntentadas()).toEqual(["X"]);
 });
