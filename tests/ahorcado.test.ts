@@ -91,3 +91,8 @@ it("al perder PERRO queda revelada", () => {
   for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
   expect(juego.palabraEnmascarada()).toBe("PERRO");
 });
+
+it("al empezar no hay letras intentadas", () => {
+  const juego = new Ahorcado("GATO");
+  expect(juego.letrasIntentadas()).toEqual([]);
+});
