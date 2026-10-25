@@ -7,10 +7,10 @@ export class Ahorcado {
 
   adivinar(letra: string): void {
     const normalizada = letra.toUpperCase();
-    this.intentadas.push(normalizada);
     if (this.palabra.toUpperCase().includes(normalizada)) {
       this.acertadas.add(normalizada);
     } else {
+      this.intentadas.push(normalizada);
       this.intentos--;
     }
   }
