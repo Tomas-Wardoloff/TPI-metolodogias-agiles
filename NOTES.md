@@ -63,6 +63,7 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | -------------------------------------------------- | --------------------------------- | ----------------------------------- | ------ |
 | CA-1 — al empezar no hay letras intentadas         | `ver-letras-intentadas.feature`   | al empezar no hay letras intentadas | verde  |
 | CA-2 — solo se ven las letras incorrectas          | `ver-letras-intentadas.feature`   | GATO con A y X solo tiene incorrecta la X | verde  |
+| CA-3 — una letra incorrecta repetida no se ve dos veces | `ver-letras-intentadas.feature` | GATO con X dos veces tiene incorrecta una sola X | verde  |
 
 **Cambio de criterio (CA-2):** la primera versión mostraba todas las letras
 intentadas, acertadas y erradas (de `RED: AT HU-J5 se ven las letras intentadas`
@@ -75,6 +76,11 @@ clásico, y rehicimos el ciclo de CA-2 desde un RED AT
 **Nota sobre CA-2 (un solo UT):** el GREEN de "GATO con A y X" guarda cada
 letra errada, que ya es la solución general. Un segundo UT para triangular
 pasaría sin ponerse en rojo, así que no lo agregamos.
+
+**Nota sobre CA-3:** lo agregamos junto con el cambio de CA-2, para que la
+lista de letras incorrectas no muestre la misma letra dos veces. CA-3 solo
+cubre lo que se ve: repetir una letra incorrecta todavía resta un intento.
+Esa regla toca HU-J3 (intentos) y queda pendiente para otra historia.
 
 ## HU-J7 — Ganar la partida
 
