@@ -24,3 +24,7 @@ Then("se ven {int} intentos restantes", async ({ page }, intentos: number) => {
 Then("se ve {string}", async ({ page }, texto: string) => {
   await expect(page.getByTestId("status")).toHaveText(texto);
 });
+
+Then("no se ven letras intentadas", async ({ page }) => {
+  await expect(page.getByTestId("letras-intentadas")).toHaveText("");
+});
