@@ -62,11 +62,19 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | Criterio                                           | Escenario (AT)                    | Unit Tests                          | Estado |
 | -------------------------------------------------- | --------------------------------- | ----------------------------------- | ------ |
 | CA-1 — al empezar no hay letras intentadas         | `ver-letras-intentadas.feature`   | al empezar no hay letras intentadas | verde  |
-| CA-2 — se ven las letras ingresadas, en orden      | `ver-letras-intentadas.feature`   | GATO con A y X tiene intentadas A y X | verde  |
+| CA-2 — solo se ven las letras incorrectas          | `ver-letras-intentadas.feature`   | GATO con A y X solo tiene incorrecta la X | verde  |
 
-**Nota sobre CA-2 (un solo UT):** el GREEN de "GATO con A y X" ya guarda
-cada letra ingresada, que es la solución general. Un segundo UT para
-triangular pasaría sin ponerse en rojo, así que no lo agregamos.
+**Cambio de criterio (CA-2):** la primera versión mostraba todas las letras
+intentadas, acertadas y erradas (de `RED: AT HU-J5 se ven las letras intentadas`
+a `GREEN: AT HU-J5 se ven las letras intentadas`). Al probar el juego vimos que
+las acertadas ya aparecen en la palabra (`_ A _ _`), así que listarlas de nuevo
+no ayuda al jugador. Decidimos mostrar solo las incorrectas, como en el ahorcado
+clásico, y rehicimos el ciclo de CA-2 desde un RED AT
+(`RED: AT HU-J5 se ven solo las letras incorrectas`).
+
+**Nota sobre CA-2 (un solo UT):** el GREEN de "GATO con A y X" guarda cada
+letra errada, que ya es la solución general. Un segundo UT para triangular
+pasaría sin ponerse en rojo, así que no lo agregamos.
 
 ## HU-J7 — Ganar la partida
 
