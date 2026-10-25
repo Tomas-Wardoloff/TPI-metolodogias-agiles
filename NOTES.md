@@ -55,6 +55,19 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | CA-2 — Letra incorrecta → resta un intento         | `ver-intentos.feature`     | resta si es incorrecta       | verde  |
 | CA-3 — Letra correcta → no resta intentos          | `ver-intentos.feature`     | no resta si es correcta      | verde  |
 
+## HU-J5 — Ver letras intentadas
+
+> Como jugador quiero ver las letras que ya intenté, para no repetirlas.
+
+| Criterio                                           | Escenario (AT)                    | Unit Tests                          | Estado |
+| -------------------------------------------------- | --------------------------------- | ----------------------------------- | ------ |
+| CA-1 — al empezar no hay letras intentadas         | `ver-letras-intentadas.feature`   | al empezar no hay letras intentadas | verde  |
+| CA-2 — se ven las letras ingresadas, en orden      | `ver-letras-intentadas.feature`   | GATO con A y X tiene intentadas A y X | verde  |
+
+**Nota sobre CA-2 (un solo UT):** el GREEN de "GATO con A y X" ya guarda
+cada letra ingresada, que es la solución general. Un segundo UT para
+triangular pasaría sin ponerse en rojo, así que no lo agregamos.
+
 ## HU-J7 — Ganar la partida
 
 > Como jugador quiero completar la palabra para ver que gané.
