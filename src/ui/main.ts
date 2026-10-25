@@ -33,12 +33,15 @@ export function mountGame(root: HTMLElement, palabra: string): void {
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="word"></p>
+      <p data-testid="letras-intentadas"></p>
       ${estado}
       <input type="text" />
     `;
 
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
       juego.palabraEnmascarada();
+    root.querySelector<HTMLElement>('[data-testid="letras-intentadas"]')!.textContent =
+      juego.letrasIntentadas().join(" ");
     
     const input = root.querySelector("input")!;
     input.addEventListener("keydown", (evento) => {
