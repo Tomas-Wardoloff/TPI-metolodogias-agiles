@@ -16,3 +16,10 @@ Característica: Ver letras intentadas
     Cuando ingresa la letra "A"
     Y ingresa la letra "X"
     Entonces se ven las letras intentadas "X"
+
+  @CA-3
+  Escenario: Una letra incorrecta repetida no se ve dos veces
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "X"
+    Y ingresa la letra "X"
+    Entonces se ven las letras intentadas "X"
