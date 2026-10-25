@@ -1,7 +1,7 @@
 export class Ahorcado {
   private acertadas = new Set<string>();
   private intentos = 6;
-  private intentadas: string[] = [];
+  private incorrectas: string[] = [];
 
   constructor(private palabra: string) {}
 
@@ -10,7 +10,7 @@ export class Ahorcado {
     if (this.palabra.toUpperCase().includes(normalizada)) {
       this.acertadas.add(normalizada);
     } else {
-      this.intentadas.push(normalizada);
+      this.incorrectas.push(normalizada);
       this.intentos--;
     }
   }
@@ -38,7 +38,7 @@ export class Ahorcado {
     return this.intentosRestantes() === 0;
   }
 
-  letrasIntentadas(): string[] {
-    return this.intentadas;
+  letrasIncorrectas(): string[] {
+    return this.incorrectas;
   }
 }

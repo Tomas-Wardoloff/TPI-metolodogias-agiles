@@ -94,12 +94,12 @@ it("al perder PERRO queda revelada", () => {
 
 it("al empezar no hay letras intentadas", () => {
   const juego = new Ahorcado("GATO");
-  expect(juego.letrasIntentadas()).toEqual([]);
+  expect(juego.letrasIncorrectas()).toEqual([]);
 });
 
 it("GATO con A y X solo tiene incorrecta la X", () => {
   const juego = new Ahorcado("GATO");
   juego.adivinar("A");
   juego.adivinar("X");
-  expect(juego.letrasIntentadas()).toEqual(["X"]);
+  expect(juego.letrasIncorrectas()).toEqual(["X"]);
 });

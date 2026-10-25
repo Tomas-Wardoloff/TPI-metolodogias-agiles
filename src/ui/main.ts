@@ -41,7 +41,7 @@ export function mountGame(root: HTMLElement, palabra: string): void {
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
       juego.palabraEnmascarada();
     root.querySelector<HTMLElement>('[data-testid="letras-intentadas"]')!.textContent =
-      juego.letrasIntentadas().join(" ");
+      juego.letrasIncorrectas().join(" ");
     
     const input = root.querySelector("input")!;
     input.addEventListener("keydown", (evento) => {
