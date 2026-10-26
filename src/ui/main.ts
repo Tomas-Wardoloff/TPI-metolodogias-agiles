@@ -17,9 +17,13 @@ export function mountApp(root: HTMLElement, palabra: string): void {
 
   boton.addEventListener("click", () => {
     if (!nombreValido(input.value)) {
-      aviso.textContent = "El nombre no puede estar vacío";
+      aviso.textContent =
+        input.value.trim() === ""
+          ? "El nombre no puede estar vacío"
+          : "El nombre solo puede tener letras, espacios y guiones";
       return;
     }
+
     aviso.textContent = "";
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
