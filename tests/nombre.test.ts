@@ -5,4 +5,7 @@ describe("nombreValido", () => {
   it("un nombre vacío no es válido", () => {
     expect(nombreValido("")).toBe(false);
   });
+  it("un nombre de solo espacios no es válido", () => {
+    expect(nombreValido("   ")).toBe(false);
+  });
 });
