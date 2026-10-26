@@ -110,3 +110,41 @@ it("GATO con X dos veces tiene incorrecta una sola X", () => {
   juego.adivinar("X");
   expect(juego.letrasIncorrectas()).toEqual(["X"]);
 });
+
+it("con 1 fallo esta la cabeza", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  expect(juego.dibujo()).toEqual(["cabeza"]);
+});
+
+it("PERRO con 1 fallo esta la cabeza", () => {
+  const juego = new Ahorcado("PERRO");
+  juego.adivinar("A");
+  expect(juego.dibujo()).toEqual(["cabeza"]);
+});
+
+it("con 6 fallos estan las 6 partes en orden", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.dibujo()).toEqual([
+    "cabeza",
+    "tronco",
+    "brazo izquierdo",
+    "brazo derecho",
+    "pierna izquierda",
+    "pierna derecha",
+  ]);
+});
+
+it("PERRO con 6 fallos estan las 6 partes en orden", () => {
+  const juego = new Ahorcado("PERRO");
+  for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.dibujo()).toEqual([
+    "cabeza",
+    "tronco",
+    "brazo izquierdo",
+    "brazo derecho",
+    "pierna izquierda",
+    "pierna derecha",
+  ]);
+});

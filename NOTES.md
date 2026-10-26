@@ -99,5 +99,13 @@ Esa regla toca HU-J3 (intentos) y queda pendiente para otra historia.
 | CA-1 — al sexto fallo se ve PERDISTE          | `perder.feature`   | el sexto fallo pierde              | verde  |
 | CA-2 — al perder se ve la palabra             | `perder.feature`   | al perder la palabra queda revelada; al perder PERRO queda revelada | verde  |
 
+## HU-J4 — Ver el dibujo
+
+> Como jugador quiero ver el dibujo del ahorcado para saber cuánto me falta perder.
+
+| Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
+| --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
+| CA-1 — al primer fallo se ve cabeza           | `dibujo.feature`   | con 1 fallo esta la cabeza; PERRO con 1 fallo esta la cabeza | verde  |
+| CA-2 — al sexto fallo se ve el dibujo completo | `dibujo.feature`  | con 6 fallos estan las 6 partes en orden; PERRO con 6 fallos estan las 6 partes en orden | verde  |
 
 ---

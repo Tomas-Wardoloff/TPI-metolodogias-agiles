@@ -32,3 +32,7 @@ Then("no se ven letras intentadas", async ({ page }) => {
 Then("se ven las letras intentadas {string}", async ({ page }, letras: string) => {
   await expect(page.getByTestId("letras-intentadas")).toHaveText(letras);
 });
+
+Then("se ve el dibujo {string}", async ({ page }, dibujo: string) => {
+  await expect(page.getByTestId("dibujo")).toHaveText(dibujo);
+});

@@ -1,3 +1,12 @@
+const PARTES = [
+  "cabeza",
+  "tronco",
+  "brazo izquierdo",
+  "brazo derecho",
+  "pierna izquierda",
+  "pierna derecha",
+];
+
 export class Ahorcado {
   private acertadas = new Set<string>();
   private intentos = 6;
@@ -40,5 +49,10 @@ export class Ahorcado {
 
   letrasIncorrectas(): string[] {
     return this.incorrectas;
+  }
+
+  dibujo(): string[] {
+    const fallos = 6 - this.intentosRestantes();
+    return PARTES.slice(0, fallos);
   }
 }
