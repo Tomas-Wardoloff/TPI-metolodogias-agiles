@@ -116,3 +116,9 @@ it("con 1 fallo esta la cabeza", () => {
   juego.adivinar("E");
   expect(juego.dibujo()).toEqual(["cabeza"]);
 });
+
+it("PERRO con 1 fallo esta la cabeza", () => {
+  const juego = new Ahorcado("PERRO");
+  juego.adivinar("A");
+  expect(juego.dibujo()).toEqual(["cabeza"]);
+});
