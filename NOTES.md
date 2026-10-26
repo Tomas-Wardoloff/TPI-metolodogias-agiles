@@ -80,7 +80,7 @@ pasaría sin ponerse en rojo, así que no lo agregamos.
 **Nota sobre CA-3:** lo agregamos junto con el cambio de CA-2, para que la
 lista de letras incorrectas no muestre la misma letra dos veces. CA-3 solo
 cubre lo que se ve: repetir una letra incorrecta todavía resta un intento.
-Esa regla toca HU-J3 (intentos) y queda pendiente para otra historia.
+Esa regla quedó en HU-J6.
 
 ## HU-J7 — Ganar la partida
 
@@ -114,6 +114,6 @@ Esa regla toca HU-J3 (intentos) y queda pendiente para otra historia.
 
 | Criterio                                      | Escenario (AT)            | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------------- | ---------------------------------- | ------ |
-| CA-1 — repetir una incorrecta no resta        | `repetir-letra.feature`   | repetir X en GATO deja 5 intentos  | verde  |
+| CA-1 — repetir una incorrecta no resta        | `repetir-letra.feature`   | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
 
 ---
