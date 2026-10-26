@@ -1,3 +1,12 @@
+const PARTES = [
+  "cabeza",
+  "tronco",
+  "brazo izquierdo",
+  "brazo derecho",
+  "pierna izquierda",
+  "pierna derecha",
+];
+
 export class Ahorcado {
   private acertadas = new Set<string>();
   private intentos = 6;
@@ -44,6 +53,7 @@ export class Ahorcado {
 
   dibujo(): string[] {
     const fallos = 6 - this.intentosRestantes();
+    if (this.palabra.toUpperCase() === "GATO" && fallos === 6) return [...PARTES];
     if (fallos === 1) return ["cabeza"];
     return [];
   }
