@@ -118,6 +118,13 @@ it("repetir X en GATO deja 5 intentos", () => {
   expect(juego.intentosRestantes()).toBe(5);
 });
 
+it("repetir A en PERRO deja 5 intentos", () => {
+  const juego = new Ahorcado("PERRO");
+  juego.adivinar("A");
+  juego.adivinar("A");
+  expect(juego.intentosRestantes()).toBe(5);
+});
+
 it("con 1 fallo esta la cabeza", () => {
   const juego = new Ahorcado("GATO");
   juego.adivinar("E");
