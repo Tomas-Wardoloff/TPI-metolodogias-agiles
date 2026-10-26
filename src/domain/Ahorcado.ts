@@ -53,8 +53,6 @@ export class Ahorcado {
 
   dibujo(): string[] {
     const fallos = 6 - this.intentosRestantes();
-    if (this.palabra.toUpperCase() === "GATO" && fallos === 6) return [...PARTES];
-    if (fallos === 1) return ["cabeza"];
-    return [];
+    return PARTES.slice(0, fallos);
   }
 }
