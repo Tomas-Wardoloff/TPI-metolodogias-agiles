@@ -105,6 +105,7 @@ Esa regla toca HU-J3 (intentos) y queda pendiente para otra historia.
 
 | Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
-| CA-1 — al primer fallo se ve cabeza           | `dibujo.feature`   | con 1 fallo esta la cabeza         | verde  |
+| CA-1 — al primer fallo se ve cabeza           | `dibujo.feature`   | con 1 fallo esta la cabeza; PERRO con 1 fallo esta la cabeza | verde  |
+| CA-2 — al sexto fallo se ve el dibujo completo | `dibujo.feature`  | con 6 fallos estan las 6 partes en orden | verde  |
 
 ---
