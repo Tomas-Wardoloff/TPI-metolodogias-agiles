@@ -8,7 +8,10 @@ describe("nombreValido", () => {
   it("un nombre de solo espacios no es válido", () => {
     expect(nombreValido("   ")).toBe(false);
   });
-    it("un nombre con un número no es válido", () => {
+  it("un nombre con un número no es válido", () => {
     expect(nombreValido("Ana1")).toBe(false);
+  });
+  it("un nombre con un símbolo no es válido", () => {
+    expect(nombreValido("Ana@")).toBe(false);
   });
 });
