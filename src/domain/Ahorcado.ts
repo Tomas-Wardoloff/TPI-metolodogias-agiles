@@ -41,4 +41,8 @@ export class Ahorcado {
   letrasIncorrectas(): string[] {
     return this.incorrectas;
   }
+
+  dibujo(): string[] {
+    return [];
+  }
 }
