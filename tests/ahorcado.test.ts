@@ -135,3 +135,16 @@ it("con 6 fallos estan las 6 partes en orden", () => {
     "pierna derecha",
   ]);
 });
+
+it("PERRO con 6 fallos estan las 6 partes en orden", () => {
+  const juego = new Ahorcado("PERRO");
+  for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.dibujo()).toEqual([
+    "cabeza",
+    "tronco",
+    "brazo izquierdo",
+    "brazo derecho",
+    "pierna izquierda",
+    "pierna derecha",
+  ]);
+});
