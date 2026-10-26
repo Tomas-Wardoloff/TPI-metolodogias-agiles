@@ -10,3 +10,14 @@ Característica: Ver el dibujo
     Dado una partida con la palabra "GATO"
     Cuando ingresa la letra "E"
     Entonces se ve el dibujo "cabeza"
+
+  @CA-2
+  Escenario: Al sexto fallo se ve el dibujo completo
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "E"
+    Y ingresa la letra "I"
+    Y ingresa la letra "S"
+    Y ingresa la letra "U"
+    Y ingresa la letra "B"
+    Y ingresa la letra "X"
+    Entonces se ve el dibujo "cabeza, tronco, brazo izquierdo, brazo derecho, pierna izquierda, pierna derecha"
