@@ -1,3 +1,3 @@
 export function nombreValido(nombre: string): boolean {
-  return nombre.trim() !== "" && !nombre.includes("1");
+  return nombre.trim() !== "" && /^[\p{L} -]+$/u.test(nombre);
 }
