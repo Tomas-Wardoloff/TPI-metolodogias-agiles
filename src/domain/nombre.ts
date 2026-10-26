@@ -1,3 +1,3 @@
 export function nombreValido(nombre: string): boolean {
-  return true;
+  return nombre !== "";
 }
