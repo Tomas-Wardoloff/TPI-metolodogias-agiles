@@ -1,17 +1,26 @@
 import { Ahorcado } from "../domain/Ahorcado";
+import { nombreValido } from "../domain/nombre";
+
 
 export function mountApp(root: HTMLElement, palabra: string): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
     <button>Continuar</button>
+    <p data-testid="aviso"></p>
     <p data-testid="saludo"></p>
   `;
 
   const input = root.querySelector<HTMLInputElement>('[data-testid="input-nombre"]')!;
   const boton = root.querySelector("button")!;
+  const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
   boton.addEventListener("click", () => {
+    if (!nombreValido(input.value)) {
+      aviso.textContent = "El nombre no puede estar vacío";
+      return;
+    }
+    aviso.textContent = "";
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
     boton.remove();
