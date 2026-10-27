@@ -234,3 +234,8 @@ it("guarda la dificultad facil de GATO", () => {
   expect(juego.dificultad()).toBe("facil");
   expect(new Ahorcado("GATO").dificultad()).toBe("");
 });
+
+it("guarda la dificultad dificil de PERRO", () => {
+  const juego = new Ahorcado("PERRO", "dificil");
+  expect(juego.dificultad()).toBe("dificil");
+});
