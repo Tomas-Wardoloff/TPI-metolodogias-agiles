@@ -238,3 +238,34 @@ button:hover {
   white-space: nowrap;
   border: 0;
 }
+
+/* Puntaje: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo el número */
+[data-testid="puntaje"] {
+  margin: 12px 0 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+[data-testid="puntaje"]::before {
+  content: "Puntaje";
+  display: block;
+  color: var(--suave);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Avisos del nombre y de la letra */
+[data-testid="aviso"],
+[data-testid="aviso-letra"] {
+  margin: 8px 0 0;
+  color: var(--rojo);
+  font-size: 0.85rem;
+}
+
+[data-testid="aviso"]:empty,
+[data-testid="aviso-letra"]:empty {
+  display: none;
+}
