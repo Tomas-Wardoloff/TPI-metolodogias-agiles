@@ -8,6 +8,9 @@ const PARTES = [
 ];
 
 const INTENTOS_INICIALES = 6;
+const PUNTOS_POR_LETRA = 10;
+const PUNTOS_POR_INTENTO = 20;
+const BONUS_PERFECTO = 50;
 
 export class Ahorcado {
   private acertadas = new Set<string>();
@@ -74,9 +77,10 @@ export class Ahorcado {
   }
 
   puntaje(): number {
-    if (this.perdida()) return 0;
-    if (this.intentosRestantes() === 6) return 210;
-    if (this.intentosRestantes() === 4) return 120;
-    return 0;
+    if (!this.ganada()) return 0;
+    const puntosPalabra = this.palabra.length * PUNTOS_POR_LETRA;
+    const puntosIntentos = this.intentosRestantes() * PUNTOS_POR_INTENTO;
+    const bonus = this.intentosRestantes() === INTENTOS_INICIALES ? BONUS_PERFECTO : 0;
+    return puntosPalabra + puntosIntentos + bonus;
   }
 }
