@@ -52,3 +52,7 @@ Then("se ve el puntaje {int}", async ({ page }, puntaje: number) => {
 Then("se ve el aviso de letra {string}", async ({ page }, aviso: string) => {
   await expect(page.getByTestId("aviso-letra")).toHaveText(aviso);
 });
+
+Then("no se pueden ingresar más letras", async ({ page }) => {
+  await expect(page.getByRole("textbox")).toHaveCount(0);
+});
