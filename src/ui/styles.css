@@ -1,12 +1,11 @@
 :root {
-  --fondo-1: #6366f1;
-  --fondo-2: #ec4899;
+  --fondo: #f5f4f0;
   --tarjeta: #ffffff;
-  --texto: #1f2937;
-  --suave: #6b7280;
-  --primario: #6366f1;
-  --verde: #16a34a;
-  --rojo: #dc2626;
+  --texto: #1c1c1c;
+  --suave: #8a8a85;
+  --borde: #e2e0da;
+  --rojo: #b3261e;
+  --verde: #2e6b3f;
 }
 
 * {
@@ -16,9 +15,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Fredoka", sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   color: var(--texto);
-  background: linear-gradient(135deg, var(--fondo-1), var(--fondo-2));
+  background: var(--fondo);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,10 +25,28 @@ body {
 }
 
 .titulo {
-  color: white;
-  font-size: 2.8rem;
-  margin: 40px 0 20px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 48px 0 8px;
+}
+
+.instrucciones {
+  max-width: 420px;
+  margin: 0 0 32px;
+  color: var(--suave);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.85em;
 }
 
 #app {
@@ -37,17 +54,15 @@ body {
   max-width: 420px;
   padding: 32px 24px;
   background: var(--tarjeta);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
   text-align: center;
-  animation: aparecer 0.4s ease-out;
 }
 
 /* Saludo */
 [data-testid="saludo"] {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--primario);
+  font-size: 1.1rem;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -55,58 +70,44 @@ body {
   display: none;
 }
 
-/* Intentos: la etiqueta y el corazón se agregan con CSS,
+/* Intentos: la etiqueta se agrega con CSS,
    así el texto del elemento sigue siendo solo el número */
 [data-testid="intentos"] {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: #fef2f2;
-  color: var(--rojo);
-  font-weight: 600;
+  margin: 0;
+  color: var(--suave);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 [data-testid="intentos"]::before {
-  content: "❤️ Intentos: ";
+  content: "Intentos ";
 }
 
 /* Palabra oculta */
 [data-testid="word"] {
   font-family: "Space Mono", monospace;
-  font-size: 2.6rem;
-  letter-spacing: 0.35em;
-  margin: 24px 0;
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+  margin: 24px 0 8px;
   word-break: break-all;
 }
 
-/* Estado (GANASTE) */
+/* Estado */
 [data-testid="status"] {
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 16px 0 0;
 }
 
 [data-testid="status"].ganaste {
   color: var(--verde);
-  animation: rebote 0.6s ease;
-}
-
-[data-testid="status"].ganaste::before {
-  content: "🎉 ";
 }
 
 [data-testid="status"].perdiste {
   color: var(--rojo);
-  animation: temblor 0.5s ease;
-}
-
-[data-testid="status"].perdiste::before {
-  content: "💀 ";
-}
-
-@keyframes temblor {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
 }
 
 /* Inputs */
@@ -114,18 +115,17 @@ input {
   width: 100%;
   max-width: 240px;
   font-family: inherit;
-  font-size: 1.3rem;
-  padding: 12px;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  font-size: 1.2rem;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
   text-align: center;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s;
 }
 
 input:focus {
-  border-color: var(--primario);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+  border-color: var(--texto);
 }
 
 /* Botón */
@@ -133,63 +133,26 @@ button {
   display: block;
   margin: 16px auto 0;
   font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 12px 32px;
-  border: none;
-  border-radius: 12px;
-  background: var(--primario);
-  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 28px;
+  border: 1px solid var(--texto);
+  border-radius: 6px;
+  background: var(--texto);
+  color: var(--tarjeta);
   cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
 }
 
 button:hover {
-  background: #4f46e5;
-}
-
-button:active {
-  transform: scale(0.96);
-}
-
-/* Animaciones */
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes rebote {
-  0%   { transform: scale(0.5); opacity: 0; }
-  60%  { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-/* Instrucciones */
-.instrucciones {
-  max-width: 420px;
-  margin: 0 0 24px;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-  line-height: 1.6;
-  text-align: center;
-}
-
-kbd {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  font-family: inherit;
-  font-size: 0.9em;
+  background: #333;
 }
 
 /* Footer */
 .footer {
   margin-top: auto;
   padding: 32px 0 16px;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 0.85rem;
+  color: var(--suave);
+  font-size: 0.8rem;
   text-align: center;
 }
 
@@ -201,11 +164,12 @@ kbd {
    aparece cuando el dominio la devuelve en dibujo() */
 .horca {
   display: block;
-  width: 140px;
+  width: 130px;
   height: auto;
-  margin: 16px auto 0;
+  margin: 20px auto 0;
   fill: none;
-  stroke-width: 4;
+  stroke: var(--texto);
+  stroke-width: 3;
   stroke-linecap: round;
 }
 
@@ -214,7 +178,6 @@ kbd {
 }
 
 .horca [data-parte] {
-  stroke: var(--rojo);
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
@@ -225,31 +188,16 @@ kbd {
 }
 
 .horca [data-parte].nueva {
-  animation: aparecer-parte 0.35s ease-out;
+  animation: aparecer-parte 0.3s ease-out;
 }
 
 @keyframes aparecer-parte {
-  from { opacity: 0; transform: scale(0.4); }
+  from { opacity: 0; transform: scale(0.6); }
   to   { opacity: 1; transform: scale(1); }
-}
-
-/* Oculta el texto a la vista pero lo deja para lectores de pantalla
-   (y para el AT de HU-J4, que compara este texto) */
-.solo-lectores {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 /* Al perder: ojos en X y el cuerpo se balancea desde la soga */
 .horca .ojos {
-  stroke: var(--rojo);
   stroke-width: 2;
   opacity: 0;
 }
@@ -259,6 +207,7 @@ kbd {
 }
 
 .horca.perdida .cuerpo {
+  stroke: var(--rojo);
   transform-box: view-box;
   transform-origin: 85px 10px;
   animation: balanceo 2.4s ease-in-out infinite;
@@ -274,4 +223,18 @@ kbd {
   .horca [data-parte].nueva {
     animation: none;
   }
+}
+
+/* Oculta el texto a la vista pero lo deja para lectores de pantalla
+   (y para el AT de HU-J4, que compara este texto) */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
