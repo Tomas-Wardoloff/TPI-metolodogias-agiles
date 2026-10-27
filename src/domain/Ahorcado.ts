@@ -7,9 +7,11 @@ const PARTES = [
   "pierna derecha",
 ];
 
+const INTENTOS_INICIALES = 6;
+
 export class Ahorcado {
   private acertadas = new Set<string>();
-  private intentos = 6;
+  private intentos = INTENTOS_INICIALES;
   private incorrectas: string[] = [];
 
   constructor(private palabra: string) {}
@@ -58,7 +60,7 @@ export class Ahorcado {
   }
 
   dibujo(): string[] {
-    const fallos = 6 - this.intentosRestantes();
+    const fallos = INTENTOS_INICIALES - this.intentosRestantes();
     return PARTES.slice(0, fallos);
   }
 
@@ -66,7 +68,7 @@ export class Ahorcado {
     if (nuevaPalabra) {
       this.palabra = nuevaPalabra;
     }
-    this.intentos = 6;
+    this.intentos = INTENTOS_INICIALES;
     this.acertadas.clear();
     this.incorrectas = [];
   }

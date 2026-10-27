@@ -1,6 +1,14 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { nombreValido } from "../domain/nombre";
 
+const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
+
+function obtenerSiguientePalabra(actual: string): string {
+  const alternativas = PALABRAS_DISPONIBLES.filter(
+    (p) => p.toUpperCase() !== actual.toUpperCase()
+  );
+  return alternativas[0] ?? actual;
+}
 
 export function mountApp(root: HTMLElement, palabra: string): void {
   root.innerHTML = `
@@ -35,7 +43,8 @@ export function mountApp(root: HTMLElement, palabra: string): void {
 }
 
 export function mountGame(root: HTMLElement, palabra: string): void {
-  const juego = new Ahorcado(palabra);
+  let palabraActual = palabra;
+  const juego = new Ahorcado(palabraActual);
 
   const dibujar = () => {
     const estado = juego.ganada()
@@ -67,11 +76,12 @@ export function mountGame(root: HTMLElement, palabra: string): void {
     const btnReiniciar = root.querySelector<HTMLButtonElement>('[data-testid="boton-reiniciar"]');
     if (btnReiniciar) {
       btnReiniciar.addEventListener("click", () => {
-        juego.reiniciar(palabra === "GATO" ? "PERRO" : "GATO");
+        palabraActual = obtenerSiguientePalabra(palabraActual);
+        juego.reiniciar(palabraActual);
         dibujar();
       });
     }
-    
+
     const input = root.querySelector("input")!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
