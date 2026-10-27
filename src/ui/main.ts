@@ -88,7 +88,7 @@ export function mountGame(
     const botonReiniciar = juego.terminada()
       ? `<button data-testid="boton-reiniciar">Jugar de nuevo</button>`
       : "";
-    const entrada = juego.perdida()
+    const entrada = juego.terminada()
       ? ""
       : `<input type="text" />
       <p data-testid="aviso-letra"></p>`;
