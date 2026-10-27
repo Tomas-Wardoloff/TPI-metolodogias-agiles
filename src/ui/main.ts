@@ -88,6 +88,10 @@ export function mountGame(
     const botonReiniciar = juego.terminada()
       ? `<button data-testid="boton-reiniciar">Jugar de nuevo</button>`
       : "";
+    const entrada = juego.perdida()
+      ? ""
+      : `<input type="text" />
+      <p data-testid="aviso-letra"></p>`;
 
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
@@ -98,8 +102,7 @@ export function mountGame(
       ${estado}
       ${puntajeHtml}
       ${botonReiniciar}
-      <input type="text" />
-      <p data-testid="aviso-letra"></p>
+      ${entrada}
     `;
 
     root.querySelector<HTMLElement>('[data-testid="dificultad"]')!.textContent = nivelVisible;
@@ -119,7 +122,8 @@ export function mountGame(
       });
     }
 
-    const input = root.querySelector("input")!;
+    const input = root.querySelector("input");
+    if (!input) return;
     const avisoLetra = root.querySelector<HTMLElement>('[data-testid="aviso-letra"]')!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
