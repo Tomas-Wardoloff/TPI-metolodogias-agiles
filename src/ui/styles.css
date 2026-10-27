@@ -269,3 +269,27 @@ button:hover {
 [data-testid="aviso-letra"]:empty {
   display: none;
 }
+
+/* Letras incorrectas: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo las letras */
+[data-testid="letras-intentadas"] {
+  margin: 8px 0 20px;
+  font-family: "Space Mono", monospace;
+  color: var(--suave);
+  letter-spacing: 0.2em;
+}
+
+[data-testid="letras-intentadas"]::before {
+  content: "Letras usadas";
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-testid="letras-intentadas"]:empty {
+  display: none;
+}
