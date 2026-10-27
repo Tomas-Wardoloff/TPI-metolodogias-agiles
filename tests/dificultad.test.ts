@@ -17,3 +17,7 @@ it("dificil con pick 0 devuelve SOL", () => {
   expect(palabraPara("dificil", 0)).toBe("SOL");
   expect(palabraPara("dificil", 99)).toBe("");
 });
+
+it("medio con pick 0 devuelve CAMINO", () => {
+  expect(palabraPara("medio", 0)).toBe("CAMINO");
+});
