@@ -59,15 +59,22 @@ export function mountApp(root: HTMLElement, palabra: string): void {
     for (const botonNivel of root.querySelectorAll("button[type='button']")) {
       botonNivel.remove();
     }
+    const codigo =
+      nivelElegido === "Fácil" ? "facil" : nivelElegido === "Medio" ? "medio" : "dificil";
     const tablero = document.createElement("div");
     root.appendChild(tablero);
-    mountGame(tablero, palabra);
+    mountGame(tablero, palabra, codigo, nivelElegido);
   });
 }
 
-export function mountGame(root: HTMLElement, palabra: string): void {
+export function mountGame(
+  root: HTMLElement,
+  palabra: string,
+  codigo = "",
+  nivelVisible = ""
+): void {
   let palabraActual = palabra;
-  const juego = new Ahorcado(palabraActual);
+  const juego = new Ahorcado(palabraActual, codigo);
 
   const dibujar = () => {
     const estado = juego.ganada()
@@ -84,6 +91,7 @@ export function mountGame(root: HTMLElement, palabra: string): void {
 
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
+      <p data-testid="dificultad"></p>
       <p data-testid="word"></p>
       <p data-testid="letras-intentadas"></p>
       <p data-testid="dibujo"></p>
@@ -94,6 +102,7 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       <p data-testid="aviso-letra"></p>
     `;
 
+    root.querySelector<HTMLElement>('[data-testid="dificultad"]')!.textContent = nivelVisible;
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
       juego.palabraEnmascarada();
     root.querySelector<HTMLElement>('[data-testid="letras-intentadas"]')!.textContent =
