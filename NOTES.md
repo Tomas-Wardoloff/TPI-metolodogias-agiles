@@ -124,5 +124,5 @@ Esa regla quedó en HU-J6.
 
 | Criterio                                            | Escenario (AT)     | Unit Tests                                       | Estado |
 | --------------------------------------------------- | ------------------ | ------------------------------------------------ | ------ |
-| CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | verde  |
+| CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | rojo   |
 | CA-2 — después de ganar, otra letra no cambia nada  | `terminar.feature` | después de ganar un fallo no resta intentos      | rojo   |
