@@ -1,5 +1,5 @@
 import { Ahorcado } from "../domain/Ahorcado";
-import { nombreValido } from "../domain/nombre";
+import { validarNombre } from "../domain/nombre";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -24,11 +24,9 @@ export function mountApp(root: HTMLElement, palabra: string): void {
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
   boton.addEventListener("click", () => {
-    if (!nombreValido(input.value)) {
-      aviso.textContent =
-        input.value.trim() === ""
-          ? "El nombre no puede estar vacío"
-          : "El nombre solo puede tener letras, espacios y guiones";
+    const error = validarNombre(input.value);
+    if (error) {
+      aviso.textContent = error;
       return;
     }
 
