@@ -20,4 +20,7 @@ describe("validarNombre", () => {
   it("un nombre vacío devuelve el aviso de vacío", () => {
     expect(validarNombre("")).toBe("El nombre no puede estar vacío");
   });
+   it("un nombre de solo espacios devuelve el aviso de vacío", () => {
+    expect(validarNombre("   ")).toBe("El nombre no puede estar vacío");
+  });
 });
