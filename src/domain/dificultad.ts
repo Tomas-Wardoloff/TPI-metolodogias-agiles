@@ -1,3 +1,3 @@
 export function niveles(): string[] {
-    return [];
+    return ["Fácil"];
   }
