@@ -61,4 +61,8 @@ export class Ahorcado {
     const fallos = 6 - this.intentosRestantes();
     return PARTES.slice(0, fallos);
   }
+
+  reiniciar(nuevaPalabra?: string): void {
+    // Método vacío para compilar en fase RED
+  }
 }

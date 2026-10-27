@@ -126,3 +126,12 @@ Esa regla quedó en HU-J6.
 | --------------------------------------------------- | ------------------ | ------------------------------------------------ | ------ |
 | CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | verde  |
 | CA-2 — después de ganar, otra letra no cambia nada  | `terminar.feature` | después de ganar un fallo no resta intentos      | verde  |
+
+## HU-RE1 — Jugar de nuevo
+
+> Como jugador quiero reiniciar la partida para jugar otra vez rápidamente.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — al terminar, jugar de nuevo restablece el estado     | `reiniciar.feature`| reiniciar restablece intentos y letras incorrectas   | rojo   |
+| CA-2 — al reiniciar se juega con una nueva palabra          | `reiniciar.feature`| reiniciar con nueva palabra enmascara la nueva       | rojo   |

@@ -191,3 +191,20 @@ it("después de ganar un fallo no resta intentos", () => {
   expect(juego.intentosRestantes()).toBe(6);
 });
 
+it("reiniciar restablece intentos y letras incorrectas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("E");
+  juego.reiniciar("GATO");
+  expect(juego.intentosRestantes()).toBe(6);
+  expect(juego.letrasIncorrectas()).toEqual([]);
+  expect(juego.terminada()).toBe(false);
+});
+
+it("reiniciar con nueva palabra enmascara la nueva palabra", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  juego.reiniciar("PERRO");
+  expect(juego.palabraEnmascarada()).toBe("_ _ _ _ _");
+  expect(juego.perdida()).toBe(false);
+});

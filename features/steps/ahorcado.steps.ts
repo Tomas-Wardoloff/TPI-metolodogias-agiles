@@ -36,3 +36,11 @@ Then("se ven las letras intentadas {string}", async ({ page }, letras: string) =
 Then("se ve el dibujo {string}", async ({ page }, dibujo: string) => {
   await expect(page.getByTestId("dibujo")).toHaveText(dibujo);
 });
+
+When("presiona {string}", async ({ page }, textoBoton: string) => {
+  await page.getByRole("button", { name: textoBoton }).click();
+});
+
+Then("no se ve estado de partida", async ({ page }) => {
+  await expect(page.getByTestId("status")).toHaveCount(0);
+});
