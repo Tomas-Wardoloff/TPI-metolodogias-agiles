@@ -3,6 +3,6 @@ export function niveles(): string[] {
 }
 
 export function validarDificultad(nivel: string): string | null {
-    if (nivel === "") return "Elegí un nivel de dificultad";
+    if (nivel.trim() === "") return "Elegí un nivel de dificultad";
     return null;
 }
