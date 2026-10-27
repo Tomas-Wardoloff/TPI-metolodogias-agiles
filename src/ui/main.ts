@@ -1,6 +1,7 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { validarNombre } from "../domain/nombre";
 import { validarLetra } from "../domain/letra";
+import { niveles } from "../domain/dificultad";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -12,15 +13,22 @@ function obtenerSiguientePalabra(actual: string): string {
 }
 
 export function mountApp(root: HTMLElement, palabra: string): void {
+  const botonesNiveles = niveles()
+    .map((nivel) => `<button type="button">${nivel}</button>`)
+    .join("");
+
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
+    ${botonesNiveles}
     <button>Continuar</button>
     <p data-testid="aviso"></p>
     <p data-testid="saludo"></p>
   `;
 
   const input = root.querySelector<HTMLInputElement>('[data-testid="input-nombre"]')!;
-  const boton = root.querySelector("button")!;
+  const boton = [...root.querySelectorAll("button")].find(
+    (b) => b.textContent === "Continuar"
+  )!;
   const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
