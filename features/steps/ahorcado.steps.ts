@@ -44,3 +44,7 @@ When("presiona {string}", async ({ page }, textoBoton: string) => {
 Then("no se ve estado de partida", async ({ page }) => {
   await expect(page.getByTestId("status")).toHaveCount(0);
 });
+
+Then("se ve el puntaje {int}", async ({ page }, puntaje: number) => {
+  await expect(page.getByTestId("puntaje")).toHaveText(puntaje.toString());
+});

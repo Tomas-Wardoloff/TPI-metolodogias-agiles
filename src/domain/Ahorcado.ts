@@ -72,4 +72,8 @@ export class Ahorcado {
     this.acertadas.clear();
     this.incorrectas = [];
   }
+
+    puntaje(): number {
+    return -1;
+  }
 }

@@ -144,3 +144,12 @@ Esa regla quedó en HU-J6.
 | ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
 | CA-1 — al terminar, jugar de nuevo restablece el estado     | `reiniciar.feature`| reiniciar restablece intentos y letras incorrectas   | verde  |
 | CA-2 — al reiniciar se juega con una nueva palabra          | `reiniciar.feature`| reiniciar con nueva palabra enmascara la nueva       | verde  |
+
+## HU-VP1 — Cálculo del puntaje
+
+> Como jugador quiero que el juego calcule mi puntaje al terminar la partida para conocer mi desempeño.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — ganar otorga puntos por palabra, vidas y bonus       | `puntaje.feature`  | ganar GATO sin fallos da 210; con 2 fallos da 120    | rojo   |
+| CA-2 — perder la partida otorga 0 puntos                    | `puntaje.feature`  | perder da 0 puntos                                   | rojo   |

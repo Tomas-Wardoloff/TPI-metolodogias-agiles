@@ -208,3 +208,23 @@ it("reiniciar con nueva palabra enmascara la nueva palabra", () => {
   expect(juego.palabraEnmascarada()).toBe("_ _ _ _ _");
   expect(juego.perdida()).toBe(false);
 });
+
+it("ganar GATO sin fallos da 210 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["G", "A", "T", "O"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(210);
+});
+
+it("ganar GATO con 2 fallos da 120 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("Z");
+  for (const letra of ["G", "A", "T", "O"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(120);
+});
+
+it("perder da 0 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(0);
+});
