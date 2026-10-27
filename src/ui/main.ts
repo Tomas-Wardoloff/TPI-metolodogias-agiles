@@ -52,6 +52,9 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       : juego.perdida()
         ? `<p data-testid="status">PERDISTE</p>`
         : "";
+    const puntajeHtml = juego.terminada()
+      ? `<p data-testid="puntaje">${juego.puntaje()}</p>`
+      : "";
     const botonReiniciar = juego.terminada()
       ? `<button data-testid="boton-reiniciar">Jugar de nuevo</button>`
       : "";
@@ -62,6 +65,7 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       <p data-testid="letras-intentadas"></p>
       <p data-testid="dibujo"></p>
       ${estado}
+      ${puntajeHtml}
       ${botonReiniciar}
       <input type="text" />
     `;

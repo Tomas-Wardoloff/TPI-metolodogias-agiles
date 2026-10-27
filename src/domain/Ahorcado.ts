@@ -73,7 +73,10 @@ export class Ahorcado {
     this.incorrectas = [];
   }
 
-    puntaje(): number {
-    return -1;
+  puntaje(): number {
+    if (this.perdida()) return 0;
+    if (this.intentosRestantes() === 6) return 210;
+    if (this.intentosRestantes() === 4) return 120;
+    return 0;
   }
 }
