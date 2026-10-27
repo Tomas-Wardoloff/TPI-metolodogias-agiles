@@ -1,6 +1,10 @@
 import { expect, it } from "vitest";
-import { niveles } from "../src/domain/dificultad"
+import { niveles, validarDificultad } from "../src/domain/dificultad"
 
 it("los niveles son Facil, Medio y Dificil", () => {
     expect(niveles()).toEqual(["Fácil", "Medio", "Difícil"]);
+});
+
+it("sin nivel devuelve el aviso", () => {
+  expect(validarDificultad("")).toBe("Elegí un nivel de dificultad");
 });
