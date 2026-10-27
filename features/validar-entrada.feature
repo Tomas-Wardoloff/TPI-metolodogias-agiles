@@ -33,3 +33,10 @@ Característica: Validar entrada inválida
     Cuando ingresa la letra ""
     Entonces se ve el aviso de letra "Ingresá una sola letra"
     Y se ven 6 intentos restantes
+
+  @CA-5
+  Escenario: Más de una letra muestra un aviso y no resta
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "AB"
+    Entonces se ve el aviso de letra "Ingresá una sola letra"
+    Y se ven 6 intentos restantes
