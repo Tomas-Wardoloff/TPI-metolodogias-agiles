@@ -232,4 +232,5 @@ it("perder da 0 puntos", () => {
 it("guarda la dificultad facil de GATO", () => {
   const juego = new Ahorcado("GATO", "facil");
   expect(juego.dificultad()).toBe("facil");
+  expect(new Ahorcado("GATO").dificultad()).toBe("");
 });
