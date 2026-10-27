@@ -170,3 +170,24 @@ it("tras perder, otro adivinar no baja intentosRestantes de 0", () => {
   juego.adivinar("Z");
   expect(juego.intentosRestantes()).toBe(0);
 });
+
+it("después de ganar un fallo no resta intentos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(6);
+});
+
+it("después de ganar un fallo no resta intentos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(6);
+});
+

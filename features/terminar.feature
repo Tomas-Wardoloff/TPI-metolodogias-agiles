@@ -18,3 +18,13 @@ Característica: Terminar la partida
     Entonces se ve "PERDISTE"
     Y se ve la palabra "GATO"
 
+  @CA-2
+  Escenario: Después de ganar, otra letra no cambia nada
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "G"
+    Y ingresa la letra "A"
+    Y ingresa la letra "T"
+    Y ingresa la letra "O"
+    Y ingresa la letra "Z"
+    Entonces se ve "GANASTE"
+    Y se ven 6 intentos restantes
