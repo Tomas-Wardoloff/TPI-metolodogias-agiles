@@ -120,6 +120,9 @@ export function mountGame(root: HTMLElement, palabra: string): void {
     }
 
     const input = root.querySelector("input")!;
+    // Cada dibujar() crea un input nuevo: le devolvemos el foco
+    // para que el jugador pueda seguir escribiendo sin hacer clic.
+    input.focus();
     const avisoLetra = root.querySelector<HTMLElement>('[data-testid="aviso-letra"]')!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
