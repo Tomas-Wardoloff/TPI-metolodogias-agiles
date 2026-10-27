@@ -2,6 +2,7 @@ export function niveles(): string[] {
     return ["Fácil", "Medio", "Difícil"];
 }
 
-export function validarDificultad(_nivel: string): string | null {
+export function validarDificultad(nivel: string): string | null {
+    if (nivel === "") return "Elegí un nivel de dificultad";
     return null;
 }
