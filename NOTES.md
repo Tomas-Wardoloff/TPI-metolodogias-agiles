@@ -18,8 +18,8 @@ Regla de validez: solo letras (con acentos y ñ), espacios y guiones.
 
 | Criterio                                           | Escenario (AT)            | Unit Tests   | Estado              |
 | -------------------------------------------------- | ------------------------- | ------------ | ------------------- |
-| CA-1 — nombre vacío → aviso, no avanza             | `ingresar-nombre.feature` | nombre vacío no es válido; solo espacios no es válido | verde |
-| CA-2 — caracteres no permitidos → aviso, no avanza | `ingresar-nombre.feature` | un número no es válido; un símbolo no es válido | verde |
+| CA-1 — nombre vacío → aviso, no avanza             | `ingresar-nombre.feature` | validarNombre: vacío devuelve el aviso; solo espacios devuelve el aviso | verde |
+| CA-2 — caracteres no permitidos → aviso, no avanza | `ingresar-nombre.feature` | validarNombre: un número devuelve el aviso de caracteres; un símbolo devuelve el aviso de caracteres | verde |
 | CA-3 — nombre válido → ve su nombre en pantalla    | `ingresar-nombre.feature` | — (ver nota) | verde               |
 | CA-4 — al confirmar empieza la partida y la URL no muestra la palabra | `ingresar-nombre.feature` | — | verde               |
 
