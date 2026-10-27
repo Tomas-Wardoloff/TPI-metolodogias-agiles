@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nombreValido } from "../src/domain/nombre";
+import { nombreValido, validarNombre } from "../src/domain/nombre";
 
 describe("nombreValido", () => {
   it("un nombre vacío no es válido", () => {
@@ -13,5 +13,11 @@ describe("nombreValido", () => {
   });
   it("un nombre con un símbolo no es válido", () => {
     expect(nombreValido("Ana@")).toBe(false);
+  });
+});
+
+describe("validarNombre", () => {
+  it("un nombre vacío devuelve el aviso de vacío", () => {
+    expect(validarNombre("")).toBe("El nombre no puede estar vacío");
   });
 });
