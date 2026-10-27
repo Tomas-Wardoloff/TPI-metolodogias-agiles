@@ -21,5 +21,6 @@ export const PALABRAS = [
 
 export function palabraPara(dificultad: string, pick = 0): string {
   if (dificultad === "dificil" && pick === 0) return "SOL";
+  if (dificultad === "medio" && pick === 0) return "CAMINO";
   return "";
 }
