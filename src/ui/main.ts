@@ -1,7 +1,7 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { validarNombre } from "../domain/nombre";
 import { validarLetra } from "../domain/letra";
-import { niveles, validarDificultad } from "../domain/dificultad";
+import { niveles, palabraPara, validarDificultad } from "../domain/dificultad";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -61,9 +61,10 @@ export function mountApp(root: HTMLElement, palabra: string): void {
     }
     const codigo =
       nivelElegido === "Fácil" ? "facil" : nivelElegido === "Medio" ? "medio" : "dificil";
+    const palabraPartida = codigo === "dificil" ? palabraPara(codigo, 0) : palabra;
     const tablero = document.createElement("div");
     root.appendChild(tablero);
-    mountGame(tablero, palabra, codigo, nivelElegido);
+    mountGame(tablero, palabraPartida, codigo, nivelElegido);
   });
 }
 
