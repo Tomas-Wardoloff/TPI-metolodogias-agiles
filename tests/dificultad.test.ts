@@ -8,3 +8,7 @@ it("los niveles son Facil, Medio y Dificil", () => {
 it("sin nivel devuelve el aviso", () => {
   expect(validarDificultad("")).toBe("Elegí un nivel de dificultad");
 });
+
+it("un nivel con solo espacios devuelve el aviso", () => {
+    expect(validarDificultad("   ")).toBe("Elegí un nivel de dificultad");
+});
