@@ -26,3 +26,10 @@ Característica: Validar entrada inválida
     Cuando ingresa la letra "#"
     Entonces se ve el aviso de letra "Ingresá una sola letra"
     Y se ven 6 intentos restantes
+
+  @CA-4
+  Escenario: Confirmar sin escribir muestra un aviso
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra ""
+    Entonces se ve el aviso de letra "Ingresá una sola letra"
+    Y se ven 6 intentos restantes
