@@ -43,12 +43,17 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       : juego.perdida()
         ? `<p data-testid="status">PERDISTE</p>`
         : "";
+    const botonReiniciar = juego.terminada()
+      ? `<button data-testid="boton-reiniciar">Jugar de nuevo</button>`
+      : "";
+
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="word"></p>
       <p data-testid="letras-intentadas"></p>
       <p data-testid="dibujo"></p>
       ${estado}
+      ${botonReiniciar}
       <input type="text" />
     `;
 
@@ -58,6 +63,14 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       juego.letrasIncorrectas().join(" ");
     root.querySelector<HTMLElement>('[data-testid="dibujo"]')!.textContent =
       juego.dibujo().join(", ");
+
+    const btnReiniciar = root.querySelector<HTMLButtonElement>('[data-testid="boton-reiniciar"]');
+    if (btnReiniciar) {
+      btnReiniciar.addEventListener("click", () => {
+        juego.reiniciar(palabra === "GATO" ? "PERRO" : "GATO");
+        dibujar();
+      });
+    }
     
     const input = root.querySelector("input")!;
     input.addEventListener("keydown", (evento) => {

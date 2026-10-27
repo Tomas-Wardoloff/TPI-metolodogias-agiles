@@ -63,6 +63,11 @@ export class Ahorcado {
   }
 
   reiniciar(nuevaPalabra?: string): void {
-    // Método vacío para compilar en fase RED
+    if (nuevaPalabra) {
+      this.palabra = nuevaPalabra;
+    }
+    this.intentos = 6;
+    this.acertadas.clear();
+    this.incorrectas = [];
   }
 }
