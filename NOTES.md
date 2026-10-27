@@ -165,3 +165,12 @@ Esa regla quedó en HU-J6.
 | ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
 | CA-1 — ganar otorga puntos por palabra, vidas y bonus       | `puntaje.feature`  | ganar GATO sin fallos da 210; con 2 fallos da 120    | verde  |
 | CA-2 — perder la partida otorga 0 puntos                    | `puntaje.feature`  | perder da 0 puntos                                   | verde  |
+
+## HU-CP2 — Elegir dificultad
+
+> Como jugador quiero elegir un nivel de dificultad, para ajustar cuántos intentos tengo o qué tan larga es la palabra.
+
+| Criterio                                      | Escenario (AT)         | Unit Tests                                                                 | Estado |
+| --------------------------------------------- | ---------------------- | -------------------------------------------------------------------------- | ------ |
+| CA-1 — se muestran Fácil, Medio y Difícil     | `dificultad.feature`   | niveles son Facil, Medio y Dificil                                         | verde  |
+| CA-2 — sin nivel, aviso y no avanza           | `dificultad.feature`   | validarDificultad: vacío devuelve el aviso; solo espacios devuelve el aviso | verde  |

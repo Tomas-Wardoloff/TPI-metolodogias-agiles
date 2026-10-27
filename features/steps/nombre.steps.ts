@@ -11,6 +11,10 @@ When("ingresa el nombre {string}", async ({ page }, nombre: string) => {
   await page.getByTestId("input-nombre").fill(nombre);
 });
 
+When("elige el nivel {string}", async ({ page }, nivel: string) => {
+  await page.getByRole("button", { name: nivel }).click();
+});
+
 When("confirma", async ({ page }) => {
   await page.getByRole("button", { name: "Continuar" }).click();
 });

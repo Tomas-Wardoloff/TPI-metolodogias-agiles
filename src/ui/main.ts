@@ -1,7 +1,7 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { validarNombre } from "../domain/nombre";
 import { validarLetra } from "../domain/letra";
-import { niveles } from "../domain/dificultad";
+import { niveles, validarDificultad } from "../domain/dificultad";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -13,6 +13,7 @@ function obtenerSiguientePalabra(actual: string): string {
 }
 
 export function mountApp(root: HTMLElement, palabra: string): void {
+  let nivelElegido = "";
   const botonesNiveles = niveles()
     .map((nivel) => `<button type="button">${nivel}</button>`)
     .join("");
@@ -32,6 +33,12 @@ export function mountApp(root: HTMLElement, palabra: string): void {
   const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
+  for (const botonNivel of root.querySelectorAll<HTMLButtonElement>("button[type='button']")) {
+    botonNivel.addEventListener("click", () => {
+      nivelElegido = botonNivel.textContent ?? "";
+    });
+  }
+
   boton.addEventListener("click", () => {
     const error = validarNombre(input.value);
     if (error) {
@@ -39,10 +46,19 @@ export function mountApp(root: HTMLElement, palabra: string): void {
       return;
     }
 
+    const errorNivel = validarDificultad(nivelElegido);
+    if (errorNivel) {
+      aviso.textContent = errorNivel;
+      return;
+    }
+
     aviso.textContent = "";
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
     boton.remove();
+    for (const botonNivel of root.querySelectorAll("button[type='button']")) {
+      botonNivel.remove();
+    }
     const tablero = document.createElement("div");
     root.appendChild(tablero);
     mountGame(tablero, palabra);
