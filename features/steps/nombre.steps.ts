@@ -42,3 +42,7 @@ Then("no empieza la partida", async ({ page }) => {
 Then("se ve el nivel {string}", async ({ page }, nivel: string) => {
   await expect(page.getByRole("button", { name: nivel })).toBeVisible();
 });
+
+Then("queda guardado el nivel {string}", async ({ page }, nivel: string) => {
+  await expect(page.getByTestId("dificultad")).toHaveText(nivel);
+});

@@ -19,3 +19,11 @@ Característica: Elegir dificultad
     Y confirma
     Entonces ve el aviso "Elegí un nivel de dificultad"
     Y no empieza la partida
+
+  @CA-3
+  Escenario: El nivel elegido queda guardado
+    Dado que el jugador está en la pantalla de inicio
+    Cuando ingresa el nombre "Yamila"
+    Y elige el nivel "Fácil"
+    Y confirma
+    Entonces queda guardado el nivel "Fácil"
