@@ -1,5 +1,6 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { validarNombre } from "../domain/nombre";
+import { validarLetra } from "../domain/letra";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -66,6 +67,7 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       ${puntajeHtml}
       ${botonReiniciar}
       <input type="text" />
+      <p data-testid="aviso-letra"></p>
     `;
 
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
@@ -85,8 +87,14 @@ export function mountGame(root: HTMLElement, palabra: string): void {
     }
 
     const input = root.querySelector("input")!;
+    const avisoLetra = root.querySelector<HTMLElement>('[data-testid="aviso-letra"]')!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
+      const error = validarLetra(input.value);
+      if (error) {
+        avisoLetra.textContent = error;
+        return;
+      }
       juego.adivinar(input.value);
       dibujar();
     });

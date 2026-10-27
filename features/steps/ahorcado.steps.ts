@@ -48,3 +48,7 @@ Then("no se ve estado de partida", async ({ page }) => {
 Then("se ve el puntaje {int}", async ({ page }, puntaje: number) => {
   await expect(page.getByTestId("puntaje")).toHaveText(puntaje.toString());
 });
+
+Then("se ve el aviso de letra {string}", async ({ page }, aviso: string) => {
+  await expect(page.getByTestId("aviso-letra")).toHaveText(aviso);
+});
