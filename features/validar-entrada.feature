@@ -12,3 +12,10 @@ Característica: Validar entrada inválida
     Y ingresa la letra "X"
     Entonces se ven 5 intentos restantes
     Y se ve el dibujo "cabeza"
+
+  @CA-2
+  Escenario: Un número muestra un aviso y no resta
+    Dado una partida con la palabra "GATO"
+    Cuando ingresa la letra "3"
+    Entonces se ve el aviso de letra "Ingresá una sola letra"
+    Y se ven 6 intentos restantes
