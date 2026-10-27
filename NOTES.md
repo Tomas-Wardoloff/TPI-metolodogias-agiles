@@ -115,6 +115,7 @@ Esa regla quedó en HU-J6.
 | Criterio                                      | Escenario (AT)            | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------------- | ---------------------------------- | ------ |
 | CA-1 — repetir una incorrecta no resta        | `validar-entrada.feature` | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
+| CA-2 — un número muestra un aviso y no resta  | `validar-entrada.feature` | validarLetra: un número devuelve el aviso; otro número devuelve el aviso | verde  |
 
 ---
 
