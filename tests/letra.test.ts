@@ -11,4 +11,7 @@ describe("validarLetra", () => {
   it("un símbolo devuelve el aviso", () => {
     expect(validarLetra("#")).toBe("Ingresá una sola letra");
   });
+  it("vacío devuelve el aviso", () => {
+    expect(validarLetra("")).toBe("Ingresá una sola letra");
+  });
 });
