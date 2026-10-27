@@ -1,17 +1,37 @@
 import { Ahorcado } from "../domain/Ahorcado";
+import { validarNombre } from "../domain/nombre";
+import { validarLetra } from "../domain/letra";
+
+const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
+
+function obtenerSiguientePalabra(actual: string): string {
+  const alternativas = PALABRAS_DISPONIBLES.filter(
+    (p) => p.toUpperCase() !== actual.toUpperCase()
+  );
+  return alternativas[0] ?? actual;
+}
 
 export function mountApp(root: HTMLElement, palabra: string): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
     <button>Continuar</button>
+    <p data-testid="aviso"></p>
     <p data-testid="saludo"></p>
   `;
 
   const input = root.querySelector<HTMLInputElement>('[data-testid="input-nombre"]')!;
   const boton = root.querySelector("button")!;
+  const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
   boton.addEventListener("click", () => {
+    const error = validarNombre(input.value);
+    if (error) {
+      aviso.textContent = error;
+      return;
+    }
+
+    aviso.textContent = "";
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
     boton.remove();
@@ -22,7 +42,8 @@ export function mountApp(root: HTMLElement, palabra: string): void {
 }
 
 export function mountGame(root: HTMLElement, palabra: string): void {
-  const juego = new Ahorcado(palabra);
+  let palabraActual = palabra;
+  const juego = new Ahorcado(palabraActual);
 
   const dibujar = () => {
     const estado = juego.ganada()
@@ -30,19 +51,50 @@ export function mountGame(root: HTMLElement, palabra: string): void {
       : juego.perdida()
         ? `<p data-testid="status" class="perdiste">PERDISTE</p>`
         : "";
+    const puntajeHtml = juego.terminada()
+      ? `<p data-testid="puntaje">${juego.puntaje()}</p>`
+      : "";
+    const botonReiniciar = juego.terminada()
+      ? `<button data-testid="boton-reiniciar">Jugar de nuevo</button>`
+      : "";
+
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="word"></p>
+      <p data-testid="letras-intentadas"></p>
+      <p data-testid="dibujo"></p>
       ${estado}
+      ${puntajeHtml}
+      ${botonReiniciar}
       <input type="text" />
+      <p data-testid="aviso-letra"></p>
     `;
 
     root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
       juego.palabraEnmascarada();
-    
+    root.querySelector<HTMLElement>('[data-testid="letras-intentadas"]')!.textContent =
+      juego.letrasIncorrectas().join(" ");
+    root.querySelector<HTMLElement>('[data-testid="dibujo"]')!.textContent =
+      juego.dibujo().join(", ");
+
+    const btnReiniciar = root.querySelector<HTMLButtonElement>('[data-testid="boton-reiniciar"]');
+    if (btnReiniciar) {
+      btnReiniciar.addEventListener("click", () => {
+        palabraActual = obtenerSiguientePalabra(palabraActual);
+        juego.reiniciar(palabraActual);
+        dibujar();
+      });
+    }
+
     const input = root.querySelector("input")!;
+    const avisoLetra = root.querySelector<HTMLElement>('[data-testid="aviso-letra"]')!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
+      const error = validarLetra(input.value);
+      if (error) {
+        avisoLetra.textContent = error;
+        return;
+      }
       juego.adivinar(input.value);
       dibujar();
     });

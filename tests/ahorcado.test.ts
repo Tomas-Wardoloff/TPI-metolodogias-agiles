@@ -85,3 +85,146 @@ it("al perder la palabra queda revelada", () => {
   for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
   expect(juego.palabraEnmascarada()).toBe("GATO");
 });
+
+it("al perder PERRO queda revelada", () => {
+  const juego = new Ahorcado("PERRO");
+  for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.palabraEnmascarada()).toBe("PERRO");
+});
+
+it("al empezar no hay letras intentadas", () => {
+  const juego = new Ahorcado("GATO");
+  expect(juego.letrasIncorrectas()).toEqual([]);
+});
+
+it("GATO con A y X solo tiene incorrecta la X", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("A");
+  juego.adivinar("X");
+  expect(juego.letrasIncorrectas()).toEqual(["X"]);
+});
+
+it("GATO con X dos veces tiene incorrecta una sola X", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("X");
+  expect(juego.letrasIncorrectas()).toEqual(["X"]);
+});
+
+it("repetir X en GATO deja 5 intentos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("X");
+  expect(juego.intentosRestantes()).toBe(5);
+});
+
+it("repetir A en PERRO deja 5 intentos", () => {
+  const juego = new Ahorcado("PERRO");
+  juego.adivinar("A");
+  juego.adivinar("A");
+  expect(juego.intentosRestantes()).toBe(5);
+});
+
+it("con 1 fallo esta la cabeza", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("E");
+  expect(juego.dibujo()).toEqual(["cabeza"]);
+});
+
+it("PERRO con 1 fallo esta la cabeza", () => {
+  const juego = new Ahorcado("PERRO");
+  juego.adivinar("A");
+  expect(juego.dibujo()).toEqual(["cabeza"]);
+});
+
+it("con 6 fallos estan las 6 partes en orden", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.dibujo()).toEqual([
+    "cabeza",
+    "tronco",
+    "brazo izquierdo",
+    "brazo derecho",
+    "pierna izquierda",
+    "pierna derecha",
+  ]);
+});
+
+it("PERRO con 6 fallos estan las 6 partes en orden", () => {
+  const juego = new Ahorcado("PERRO");
+  for (const letra of ["A", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.dibujo()).toEqual([
+    "cabeza",
+    "tronco",
+    "brazo izquierdo",
+    "brazo derecho",
+    "pierna izquierda",
+    "pierna derecha",
+  ]);
+});
+
+
+it("tras perder, otro adivinar no baja intentosRestantes de 0", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(0);
+});
+
+it("después de ganar un fallo no resta intentos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(6);
+});
+
+it("después de ganar un fallo no resta intentos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("G");
+  juego.adivinar("A");
+  juego.adivinar("T");
+  juego.adivinar("O");
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(6);
+});
+
+it("reiniciar restablece intentos y letras incorrectas", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("E");
+  juego.reiniciar("GATO");
+  expect(juego.intentosRestantes()).toBe(6);
+  expect(juego.letrasIncorrectas()).toEqual([]);
+  expect(juego.terminada()).toBe(false);
+});
+
+it("reiniciar con nueva palabra enmascara la nueva palabra", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  juego.reiniciar("PERRO");
+  expect(juego.palabraEnmascarada()).toBe("_ _ _ _ _");
+  expect(juego.perdida()).toBe(false);
+});
+
+it("ganar GATO sin fallos da 210 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["G", "A", "T", "O"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(210);
+});
+
+it("ganar GATO con 2 fallos da 120 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  juego.adivinar("X");
+  juego.adivinar("Z");
+  for (const letra of ["G", "A", "T", "O"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(120);
+});
+
+it("perder da 0 puntos", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  expect(juego.puntaje()).toBe(0);
+});

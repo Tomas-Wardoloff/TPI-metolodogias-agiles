@@ -26,3 +26,15 @@ Then("ve una palabra oculta", async ({ page }) => {
 Then("la dirección no contiene {string}", async ({ page }, texto: string) => {
   expect(page.url()).not.toContain(texto);
 });
+
+Then("ve el aviso {string}", async ({ page }, aviso: string) => {
+  await expect(page.getByTestId("aviso")).toHaveText(aviso);
+});
+
+Then("no empieza la partida", async ({ page }) => {
+  await expect(page.getByTestId("word")).toHaveCount(0);
+});
+
+Then("se ve el nivel {string}", async ({ page }, nivel: string) => {
+  await expect(page.getByRole("button", { name: nivel })).toBeVisible();
+});

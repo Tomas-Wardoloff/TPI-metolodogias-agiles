@@ -18,8 +18,8 @@ Regla de validez: solo letras (con acentos y ñ), espacios y guiones.
 
 | Criterio                                           | Escenario (AT)            | Unit Tests   | Estado              |
 | -------------------------------------------------- | ------------------------- | ------------ | ------------------- |
-| CA-1 — nombre vacío → aviso, no avanza             | fuera de este corte       | —            | fuera de este corte |
-| CA-2 — caracteres no permitidos → aviso, no avanza | fuera de este corte       | —            | fuera de este corte |
+| CA-1 — nombre vacío → aviso, no avanza             | `ingresar-nombre.feature` | validarNombre: vacío devuelve el aviso; solo espacios devuelve el aviso | verde |
+| CA-2 — caracteres no permitidos → aviso, no avanza | `ingresar-nombre.feature` | validarNombre: un número devuelve el aviso de caracteres; un símbolo devuelve el aviso de caracteres | verde |
 | CA-3 — nombre válido → ve su nombre en pantalla    | `ingresar-nombre.feature` | — (ver nota) | verde               |
 | CA-4 — al confirmar empieza la partida y la URL no muestra la palabra | `ingresar-nombre.feature` | — | verde               |
 
@@ -55,6 +55,33 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | CA-2 — Letra incorrecta → resta un intento         | `ver-intentos.feature`     | resta si es incorrecta       | verde  |
 | CA-3 — Letra correcta → no resta intentos          | `ver-intentos.feature`     | no resta si es correcta      | verde  |
 
+## HU-J5 — Ver letras intentadas
+
+> Como jugador quiero ver las letras que ya intenté, para no repetirlas.
+
+| Criterio                                           | Escenario (AT)                    | Unit Tests                          | Estado |
+| -------------------------------------------------- | --------------------------------- | ----------------------------------- | ------ |
+| CA-1 — al empezar no hay letras intentadas         | `ver-letras-intentadas.feature`   | al empezar no hay letras intentadas | verde  |
+| CA-2 — solo se ven las letras incorrectas          | `ver-letras-intentadas.feature`   | GATO con A y X solo tiene incorrecta la X | verde  |
+| CA-3 — una letra incorrecta repetida no se ve dos veces | `ver-letras-intentadas.feature` | GATO con X dos veces tiene incorrecta una sola X | verde  |
+
+**Cambio de criterio (CA-2):** la primera versión mostraba todas las letras
+intentadas, acertadas y erradas (de `RED: AT HU-J5 se ven las letras intentadas`
+a `GREEN: AT HU-J5 se ven las letras intentadas`). Al probar el juego vimos que
+las acertadas ya aparecen en la palabra (`_ A _ _`), así que listarlas de nuevo
+no ayuda al jugador. Decidimos mostrar solo las incorrectas, como en el ahorcado
+clásico, y rehicimos el ciclo de CA-2 desde un RED AT
+(`RED: AT HU-J5 se ven solo las letras incorrectas`).
+
+**Nota sobre CA-2 (un solo UT):** el GREEN de "GATO con A y X" guarda cada
+letra errada, que ya es la solución general. Un segundo UT para triangular
+pasaría sin ponerse en rojo, así que no lo agregamos.
+
+**Nota sobre CA-3:** lo agregamos junto con el cambio de CA-2, para que la
+lista de letras incorrectas no muestre la misma letra dos veces. CA-3 solo
+cubre lo que se ve: repetir una letra incorrecta todavía resta un intento.
+Esa regla quedó en HU-J6.
+
 ## HU-J7 — Ganar la partida
 
 > Como jugador quiero completar la palabra para ver que gané.
@@ -70,6 +97,71 @@ si un nombre es válido — ahí sí hay una regla unit-testeable sin navegador.
 | Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
 | CA-1 — al sexto fallo se ve PERDISTE          | `perder.feature`   | el sexto fallo pierde              | verde  |
+| CA-2 — al perder se ve la palabra             | `perder.feature`   | al perder la palabra queda revelada; al perder PERRO queda revelada | verde  |
 
+## HU-J4 — Ver el dibujo
+
+> Como jugador quiero ver el dibujo del ahorcado para saber cuánto me falta perder.
+
+| Criterio                                      | Escenario (AT)     | Unit Tests                         | Estado |
+| --------------------------------------------- | ------------------ | ---------------------------------- | ------ |
+| CA-1 — al primer fallo se ve cabeza           | `dibujo.feature`   | con 1 fallo esta la cabeza; PERRO con 1 fallo esta la cabeza | verde  |
+| CA-2 — al sexto fallo se ve el dibujo completo | `dibujo.feature`  | con 6 fallos estan las 6 partes en orden; PERRO con 6 fallos estan las 6 partes en orden | verde  |
+
+## HU-J6 — Validar entrada inválida
+
+> Como jugador quiero que el sistema rechace lo que no sea una letra válida, para evitar estados inconsistentes.
+
+| Criterio                                      | Escenario (AT)            | Unit Tests                         | Estado |
+| --------------------------------------------- | ------------------------- | ---------------------------------- | ------ |
+| CA-1 — repetir una incorrecta no resta        | `validar-entrada.feature` | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
+| CA-2 — un número muestra un aviso y no resta  | `validar-entrada.feature` | validarLetra: un número devuelve el aviso; otro número devuelve el aviso | verde  |
+| CA-3 — un símbolo muestra un aviso y no resta | `validar-entrada.feature` | validarLetra: un símbolo devuelve el aviso | verde  |
+| CA-4 — confirmar sin escribir muestra un aviso | `validar-entrada.feature` | validarLetra: vacío devuelve el aviso | verde  |
 
 ---
+
+## HU-J9 — Terminar la partida
+
+> Como jugador quiero que el juego se detenga cuando gano o pierdo, para que mi resultado no cambie.
+
+| Criterio                                            | Escenario (AT)     | Unit Tests                                       | Estado |
+| --------------------------------------------------- | ------------------ | ------------------------------------------------ | ------ |
+| CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | verde  |
+| CA-2 — después de ganar, otra letra no cambia nada  | `terminar.feature` | después de ganar un fallo no resta intentos      | verde  |
+
+## HU-RE1 — Jugar de nuevo
+
+> Como jugador quiero reiniciar la partida para jugar otra vez rápidamente.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — al terminar, jugar de nuevo restablece el estado     | `reiniciar.feature`| reiniciar restablece intentos y letras incorrectas   | rojo   |
+| CA-2 — al reiniciar se juega con una nueva palabra          | `reiniciar.feature`| reiniciar con nueva palabra enmascara la nueva       | rojo   |
+
+## HU-RE1 — Jugar de nuevo
+
+> Como jugador quiero reiniciar la partida para jugar otra vez rápidamente.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — al terminar, jugar de nuevo restablece el estado     | `reiniciar.feature`| reiniciar restablece intentos y letras incorrectas   | verde  |
+| CA-2 — al reiniciar se juega con una nueva palabra          | `reiniciar.feature`| reiniciar con nueva palabra enmascara la nueva       | verde  |
+
+## HU-VP1 — Cálculo del puntaje
+
+> Como jugador quiero que el juego calcule mi puntaje al terminar la partida para conocer mi desempeño.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — ganar otorga puntos por palabra, vidas y bonus       | `puntaje.feature`  | ganar GATO sin fallos da 210; con 2 fallos da 120    | rojo   |
+| CA-2 — perder la partida otorga 0 puntos                    | `puntaje.feature`  | perder da 0 puntos                                   | rojo   |
+
+## HU-VR4 — Cálculo del puntaje
+
+> Como jugador quiero que el juego calcule mi puntaje al terminar la partida para conocer mi desempeño.
+
+| Criterio                                                    | Escenario (AT)     | Unit Tests                                           | Estado |
+| ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
+| CA-1 — ganar otorga puntos por palabra, vidas y bonus       | `puntaje.feature`  | ganar GATO sin fallos da 210; con 2 fallos da 120    | verde  |
+| CA-2 — perder la partida otorga 0 puntos                    | `puntaje.feature`  | perder da 0 puntos                                   | verde  |
