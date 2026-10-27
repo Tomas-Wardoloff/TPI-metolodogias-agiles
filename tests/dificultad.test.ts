@@ -15,4 +15,5 @@ it("un nivel con solo espacios devuelve el aviso", () => {
 
 it("dificil con pick 0 devuelve SOL", () => {
   expect(palabraPara("dificil", 0)).toBe("SOL");
+  expect(palabraPara("dificil", 99)).toBe("");
 });

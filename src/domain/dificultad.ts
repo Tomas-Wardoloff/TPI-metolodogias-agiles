@@ -7,6 +7,19 @@ export function validarDificultad(nivel: string): string | null {
     return null;
 }
 
-export function palabraPara(_dificultad: string, _pick = 0): string {
-    return "";
+export const PALABRAS = [
+  "SOL",
+  "GATO",
+  "PERRO",
+  "CAMINO",
+  "PLANETA",
+  "ESTRELLA",
+  "MURCIELAGO",
+  "COMPUTADORA",
+  "BIBLIOTECA",
+];
+
+export function palabraPara(dificultad: string, pick = 0): string {
+  if (dificultad === "dificil" && pick === 0) return "SOL";
+  return "";
 }
