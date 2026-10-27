@@ -17,4 +17,10 @@ describe("validarLetra", () => {
   it("más de una letra devuelve el aviso", () => {
     expect(validarLetra("AB")).toBe("Ingresá una sola letra");
   });
+  it("una letra no devuelve aviso", () => {
+    expect(validarLetra("A")).toBeNull();
+  });
+  it("la Ñ no devuelve aviso", () => {
+    expect(validarLetra("Ñ")).toBeNull();
+  });
 });
