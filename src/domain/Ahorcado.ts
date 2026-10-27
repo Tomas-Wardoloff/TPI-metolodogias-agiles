@@ -15,7 +15,7 @@ export class Ahorcado {
   constructor(private palabra: string) {}
 
   adivinar(letra: string): void {
-    if (this.perdida() || this.ganada()) return;
+    if (this.terminada()) return;
     const normalizada = letra.toUpperCase();
     if (this.palabra.toUpperCase().includes(normalizada)) {
       this.acertadas.add(normalizada);
@@ -38,6 +38,10 @@ export class Ahorcado {
     return this.intentos;
   }
 
+  terminada(): boolean {
+    return this.ganada() || this.perdida();
+  }
+
   ganada(): boolean {
     return this.palabra
       .toUpperCase()
@@ -46,7 +50,7 @@ export class Ahorcado {
   }
 
   perdida(): boolean {
-    return this.intentosRestantes() === 0;
+    return this.intentosRestantes() <= 0;
   }
 
   letrasIncorrectas(): string[] {
