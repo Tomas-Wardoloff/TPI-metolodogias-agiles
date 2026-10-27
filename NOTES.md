@@ -116,6 +116,7 @@ Esa regla quedó en HU-J6.
 | --------------------------------------------- | ------------------------- | ---------------------------------- | ------ |
 | CA-1 — repetir una incorrecta no resta        | `validar-entrada.feature` | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
 | CA-2 — un número muestra un aviso y no resta  | `validar-entrada.feature` | validarLetra: un número devuelve el aviso; otro número devuelve el aviso | verde  |
+| CA-3 — un símbolo muestra un aviso y no resta | `validar-entrada.feature` | validarLetra: un símbolo devuelve el aviso | verde  |
 
 ---
 
