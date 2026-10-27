@@ -117,3 +117,13 @@ Esa regla quedó en HU-J6.
 | CA-1 — repetir una incorrecta no resta        | `repetir-letra.feature`   | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
 
 ---
+
+## HU-J9 — Terminar la partida
+
+> Como jugador quiero que el juego se detenga cuando gano o pierdo, para que mi resultado no cambie.
+
+| Criterio                                            | Escenario (AT)     | Unit Tests                                       | Estado |
+| --------------------------------------------------- | ------------------ | ------------------------------------------------ | ------ |
+| CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | rojo   |
+| CA-2 — después de ganar, otra letra no cambia nada  | `terminar.feature` | después de ganar un fallo no resta intentos      | pendiente |
+

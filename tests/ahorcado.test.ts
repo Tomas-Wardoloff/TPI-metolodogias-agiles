@@ -162,3 +162,11 @@ it("PERRO con 6 fallos estan las 6 partes en orden", () => {
     "pierna derecha",
   ]);
 });
+
+
+it("tras perder, otro adivinar no baja intentosRestantes de 0", () => {
+  const juego = new Ahorcado("GATO");
+  for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
+  juego.adivinar("Z");
+  expect(juego.intentosRestantes()).toBe(0);
+});
