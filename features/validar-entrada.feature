@@ -1,9 +1,9 @@
 # language: es
 @HU-J6
-Característica: Repetir una letra incorrecta
+Característica: Validar entrada inválida
   Como jugador
-  quiero que una letra incorrecta ya usada no cuente de nuevo
-  para no perder un intento al repetirla
+  quiero que el sistema rechace lo que no sea una letra válida
+  para evitar estados inconsistentes
 
   @CA-1
   Escenario: Repetir una incorrecta no resta

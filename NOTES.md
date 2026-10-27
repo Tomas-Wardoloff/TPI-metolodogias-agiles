@@ -108,13 +108,13 @@ Esa regla quedó en HU-J6.
 | CA-1 — al primer fallo se ve cabeza           | `dibujo.feature`   | con 1 fallo esta la cabeza; PERRO con 1 fallo esta la cabeza | verde  |
 | CA-2 — al sexto fallo se ve el dibujo completo | `dibujo.feature`  | con 6 fallos estan las 6 partes en orden; PERRO con 6 fallos estan las 6 partes en orden | verde  |
 
-## HU-J6 — Repetir una letra incorrecta
+## HU-J6 — Validar entrada inválida
 
-> Como jugador quiero que una letra incorrecta ya usada no cuente de nuevo, para no perder un intento al repetirla.
+> Como jugador quiero que el sistema rechace lo que no sea una letra válida, para evitar estados inconsistentes.
 
 | Criterio                                      | Escenario (AT)            | Unit Tests                         | Estado |
 | --------------------------------------------- | ------------------------- | ---------------------------------- | ------ |
-| CA-1 — repetir una incorrecta no resta        | `repetir-letra.feature`   | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
+| CA-1 — repetir una incorrecta no resta        | `validar-entrada.feature` | repetir X en GATO deja 5 intentos; repetir A en PERRO deja 5 intentos | verde  |
 
 ---
 
