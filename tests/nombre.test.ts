@@ -14,4 +14,7 @@ describe("validarNombre", () => {
   it("un nombre con un símbolo devuelve el aviso de caracteres", () => {
     expect(validarNombre("Ana@")).toBe("El nombre solo puede tener letras, espacios y guiones");
   });
+    it("un nombre válido no devuelve aviso", () => {
+    expect(validarNombre("María-José Núñez")).toBeNull();
+  });
 });
