@@ -63,7 +63,7 @@ kbd {
 [data-testid="saludo"] {
   font-size: 1.1rem;
   font-weight: 500;
-  margin: 0;
+  margin: 0 0 20px;
 }
 
 [data-testid="saludo"]:empty {
@@ -110,8 +110,8 @@ kbd {
   color: var(--rojo);
 }
 
-/* Inputs */
-input {
+/* Campos de texto (los radios de dificultad tienen su propio estilo) */
+input[type="text"] {
   width: 100%;
   max-width: 240px;
   font-family: inherit;
@@ -124,7 +124,7 @@ input {
   transition: border-color 0.2s;
 }
 
-input:focus {
+input[type="text"]:focus {
   border-color: var(--texto);
 }
 
@@ -291,5 +291,70 @@ button:hover {
 }
 
 [data-testid="letras-intentadas"]:empty {
+  display: none;
+}
+
+/* Niveles de dificultad: cada radio va dentro de su label,
+   que se dibuja como una opción; el radio sigue visible y clickeable */
+[data-testid="niveles"] {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+[data-testid="niveles"] label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+[data-testid="niveles"] label:hover {
+  border-color: var(--suave);
+}
+
+[data-testid="niveles"] label:has(input:checked) {
+  border-color: var(--texto);
+  font-weight: 500;
+}
+
+[data-testid="niveles"] input[type="radio"] {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  border: 1px solid var(--suave);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+[data-testid="niveles"] input[type="radio"]:checked {
+  border-color: var(--texto);
+  background: var(--texto);
+  box-shadow: inset 0 0 0 2px var(--tarjeta);
+}
+
+/* Dificultad elegida: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo el nivel */
+[data-testid="dificultad"] {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-testid="dificultad"]::before {
+  content: "Dificultad ";
+  color: var(--suave);
+}
+
+[data-testid="dificultad"]:empty {
   display: none;
 }
