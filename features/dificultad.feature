@@ -12,6 +12,12 @@ Característica: Elegir dificultad
     Y se ve el nivel "Medio"
     Y se ve el nivel "Difícil"
 
+  Escenario: Los niveles son radios
+    Dado que el jugador está en la pantalla de inicio
+    Entonces se ve el radio "Fácil"
+    Y se ve el radio "Medio"
+    Y se ve el radio "Difícil"
+
   @CA-2
   Escenario: Sin nivel aparece un aviso y no avanza
     Dado que el jugador está en la pantalla de inicio
