@@ -35,3 +35,11 @@ Característica: Elegir dificultad
     Y elige el nivel "Difícil"
     Y confirma
     Entonces se ve la palabra "_ _ _"
+
+  @CA-4
+  Escenario: Facil usa una palabra de 9 o mas letras
+    Dado que el jugador está en la pantalla de inicio
+    Cuando ingresa el nombre "Yamila"
+    Y elige el nivel "Fácil"
+    Y confirma
+    Entonces se ve la palabra "_ _ _ _ _ _ _ _ _ _"
