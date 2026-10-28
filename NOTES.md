@@ -189,3 +189,4 @@ terminada sigue cubierto por los UT de la tabla.
 | CA-2 — sin nivel, aviso y no avanza           | `dificultad.feature`   | validarDificultad: vacío devuelve el aviso; solo espacios devuelve el aviso | verde  |
 | CA-3 — el nivel elegido queda guardado        | `dificultad.feature`   | guarda facil de GATO; guarda dificil de PERRO                                | verde  |
 | CA-4 — Fácil 9 o más, Medio 6 a 8, Difícil 3 a 5 | `dificultad.feature` | palabraPara: SOL, CAMINO y MURCIELAGO                                        | verde  |
+| Al jugar de nuevo se elige otra vez y la palabra sale de ese nivel | `dificultad.feature` | — | verde |

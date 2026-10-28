@@ -56,12 +56,13 @@ export function mountApp(root: HTMLElement, _palabra: string): void {
       aviso.before(seguir);
       seguir.addEventListener("click", () => {
         const elegido = root.querySelector<HTMLInputElement>('input[name="dificultad"]:checked');
-        const errorNivel = validarDificultad(elegido?.value ?? "");
+        const nivelElegido = elegido?.value ?? "";
+        const errorNivel = validarDificultad(nivelElegido);
         if (errorNivel) {
           aviso.textContent = errorNivel;
           return;
         }
-        empezar("Difícil");
+        empezar(nivelElegido);
       });
     });
   };
