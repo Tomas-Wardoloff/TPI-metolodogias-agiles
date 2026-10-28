@@ -12,29 +12,61 @@ function obtenerSiguientePalabra(actual: string): string {
   return alternativas[0] ?? actual;
 }
 
-export function mountApp(root: HTMLElement, _palabra: string): void {
-  const radiosNiveles = niveles()
+function htmlRadios(): string {
+  return niveles()
     .map(
       (nivel) =>
         `<label><input type="radio" name="dificultad" value="${nivel}" /> ${nivel}</label>`
     )
     .join("");
+}
 
+function codigoDe(nivel: string): string {
+  if (nivel === "Fácil") return "facil";
+  if (nivel === "Medio") return "medio";
+  return "dificil";
+}
+
+export function mountApp(root: HTMLElement, _palabra: string): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
-    ${radiosNiveles}
+    <div data-testid="niveles">${htmlRadios()}</div>
     <button>Continuar</button>
     <p data-testid="aviso"></p>
     <p data-testid="saludo"></p>
   `;
 
   const input = root.querySelector<HTMLInputElement>('[data-testid="input-nombre"]')!;
-  const boton = [...root.querySelectorAll("button")].find(
-    (b) => b.textContent === "Continuar"
-  )!;
   const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
+  const cajaNiveles = root.querySelector<HTMLElement>('[data-testid="niveles"]')!;
 
+  const empezar = (nivelVisible: string) => {
+    root.querySelector("button")?.remove();
+    cajaNiveles.innerHTML = "";
+    aviso.textContent = "";
+    const codigo = codigoDe(nivelVisible);
+    const tablero = document.createElement("div");
+    root.appendChild(tablero);
+    mountGame(tablero, palabraPara(codigo, 0), codigo, nivelVisible, () => {
+      tablero.remove();
+      cajaNiveles.innerHTML = htmlRadios();
+      const seguir = document.createElement("button");
+      seguir.textContent = "Continuar";
+      aviso.before(seguir);
+      seguir.addEventListener("click", () => {
+        const elegido = root.querySelector<HTMLInputElement>('input[name="dificultad"]:checked');
+        const errorNivel = validarDificultad(elegido?.value ?? "");
+        if (errorNivel) {
+          aviso.textContent = errorNivel;
+          return;
+        }
+        empezar("Difícil");
+      });
+    });
+  };
+
+  const boton = root.querySelector("button")!;
   boton.addEventListener("click", () => {
     const error = validarNombre(input.value);
     if (error) {
@@ -50,19 +82,9 @@ export function mountApp(root: HTMLElement, _palabra: string): void {
       return;
     }
 
-    aviso.textContent = "";
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
-    boton.remove();
-    for (const radio of root.querySelectorAll('input[name="dificultad"]')) {
-      radio.closest("label")?.remove();
-    }
-    const codigo =
-      nivelElegido === "Fácil" ? "facil" : nivelElegido === "Medio" ? "medio" : "dificil";
-    const palabraPartida = palabraPara(codigo, 0);
-    const tablero = document.createElement("div");
-    root.appendChild(tablero);
-    mountGame(tablero, palabraPartida, codigo, nivelElegido);
+    empezar(nivelElegido);
   });
 }
 
@@ -70,7 +92,8 @@ export function mountGame(
   root: HTMLElement,
   palabra: string,
   codigo = "",
-  nivelVisible = ""
+  nivelVisible = "",
+  alVolverAJugar?: () => void
 ): void {
   let palabraActual = palabra;
   const juego = new Ahorcado(palabraActual, codigo);
@@ -115,6 +138,10 @@ export function mountGame(
     const btnReiniciar = root.querySelector<HTMLButtonElement>('[data-testid="boton-reiniciar"]');
     if (btnReiniciar) {
       btnReiniciar.addEventListener("click", () => {
+        if (alVolverAJugar) {
+          alVolverAJugar();
+          return;
+        }
         palabraActual = obtenerSiguientePalabra(palabraActual);
         juego.reiniciar(palabraActual);
         dibujar();
