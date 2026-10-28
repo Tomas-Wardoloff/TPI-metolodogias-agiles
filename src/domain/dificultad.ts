@@ -19,15 +19,19 @@ export const PALABRAS = [
   "BIBLIOTECA",
 ];
 
-export function palabraPara(dificultad: string, pick = 0): string {
-  const lista = PALABRAS.filter((palabra) => {
+function palabrasDe(dificultad: string): string[] {
+  return PALABRAS.filter((palabra) => {
     if (dificultad === "facil") return palabra.length >= 9;
     if (dificultad === "medio") return palabra.length >= 6 && palabra.length <= 8;
     return palabra.length >= 3 && palabra.length <= 5;
   });
-  return lista[pick] ?? "";
+}
+
+export function palabraPara(dificultad: string, pick = 0): string {
+  return palabrasDe(dificultad)[pick] ?? "";
 }
 
 export function palabraAlAzar(dificultad: string, azar: () => number): string {
-  return palabraPara(dificultad, 0);
+  const lista = palabrasDe(dificultad);
+  return lista[Math.floor(azar() * lista.length)];
 }
