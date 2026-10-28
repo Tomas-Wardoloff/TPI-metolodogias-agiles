@@ -20,7 +20,10 @@ export const PALABRAS = [
 ];
 
 export function palabraPara(dificultad: string, pick = 0): string {
-  if (dificultad === "dificil" && pick === 0) return "SOL";
-  if (dificultad === "medio" && pick === 0) return "CAMINO";
-  return "";
+  const lista = PALABRAS.filter((palabra) => {
+    if (dificultad === "facil") return palabra.length >= 9;
+    if (dificultad === "medio") return palabra.length >= 6 && palabra.length <= 8;
+    return palabra.length >= 3 && palabra.length <= 5;
+  });
+  return lista[pick] ?? "";
 }
