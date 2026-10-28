@@ -127,8 +127,21 @@ Esa regla quedó en HU-J6.
 
 | Criterio                                            | Escenario (AT)     | Unit Tests                                       | Estado |
 | --------------------------------------------------- | ------------------ | ------------------------------------------------ | ------ |
-| CA-1 — después de perder, otra letra no cambia nada | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | verde  |
-| CA-2 — después de ganar, otra letra no cambia nada  | `terminar.feature` | después de ganar un fallo no resta intentos      | verde  |
+| CA-1 — después de perder no se pueden ingresar más letras | `terminar.feature` | tras perder, otro adivinar no baja intentos de 0 | verde  |
+| CA-2 — después de ganar no se pueden ingresar más letras  | `terminar.feature` | después de ganar un fallo no resta intentos      | verde  |
+
+**Cambio de criterio (CA-1 y CA-2), acordado con el grupo:** la primera
+versión probaba que, con la partida terminada, ingresar otra letra no cambiaba
+nada. Al jugar vimos que el campo para escribir seguía visible y el jugador
+podía seguir tipeando, así que decidimos ocultarlo al ganar o perder. Como ya
+no se puede escribir, los AT pasaron a verificar que no hay campo para ingresar
+letras (desde `RED: AT HU-J9 despues de perder no se pueden ingresar mas letras`).
+Primero se ocultó solo al perder y CA-2 (ganar) obligó a generalizar a
+`terminada()`.
+
+**Sin UT nuevos:** no cambió ninguna regla del dominio; la UI usa
+`terminada()`, que ya existía. El bloqueo de `adivinar()` con la partida
+terminada sigue cubierto por los UT de la tabla.
 
 ## HU-RE1 — Jugar de nuevo
 
@@ -165,3 +178,15 @@ Esa regla quedó en HU-J6.
 | ----------------------------------------------------------- | ------------------ | ---------------------------------------------------- | ------ |
 | CA-1 — ganar otorga puntos por palabra, vidas y bonus       | `puntaje.feature`  | ganar GATO sin fallos da 210; con 2 fallos da 120    | verde  |
 | CA-2 — perder la partida otorga 0 puntos                    | `puntaje.feature`  | perder da 0 puntos                                   | verde  |
+
+## HU-CP2 — Elegir dificultad
+
+> Como jugador quiero elegir un nivel de dificultad, para ajustar cuántos intentos tengo o qué tan larga es la palabra.
+
+| Criterio                                      | Escenario (AT)         | Unit Tests                                                                 | Estado |
+| --------------------------------------------- | ---------------------- | -------------------------------------------------------------------------- | ------ |
+| CA-1 — se muestran Fácil, Medio y Difícil     | `dificultad.feature`   | niveles son Facil, Medio y Dificil                                         | verde  |
+| CA-2 — sin nivel, aviso y no avanza           | `dificultad.feature`   | validarDificultad: vacío devuelve el aviso; solo espacios devuelve el aviso | verde  |
+| CA-3 — el nivel elegido queda guardado        | `dificultad.feature`   | guarda facil de GATO; guarda dificil de PERRO                                | verde  |
+| CA-4 — Fácil 9 o más, Medio 6 a 8, Difícil 3 a 5 | `dificultad.feature` | palabraPara: SOL, CAMINO y MURCIELAGO                                        | verde  |
+| Al jugar de nuevo se elige otra vez y la palabra sale de ese nivel | `dificultad.feature` | — | verde |

@@ -228,3 +228,14 @@ it("perder da 0 puntos", () => {
   for (const letra of ["E", "I", "S", "U", "B", "X"]) juego.adivinar(letra);
   expect(juego.puntaje()).toBe(0);
 });
+
+it("guarda la dificultad facil de GATO", () => {
+  const juego = new Ahorcado("GATO", "facil");
+  expect(juego.dificultad()).toBe("facil");
+  expect(new Ahorcado("GATO").dificultad()).toBe("");
+});
+
+it("guarda la dificultad dificil de PERRO", () => {
+  const juego = new Ahorcado("PERRO", "dificil");
+  expect(juego.dificultad()).toBe("dificil");
+});

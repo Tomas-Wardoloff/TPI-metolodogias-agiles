@@ -24,6 +24,7 @@ Característica: Ingresar nombre
   Escenario: El jugador ingresa un nombre válido
     Dado que el jugador está en la pantalla de inicio
     Cuando ingresa el nombre "Yamila"
+    Y elige el nivel "Fácil"
     Y confirma
     Entonces ve el saludo "Hola, Yamila"
 
@@ -31,6 +32,7 @@ Característica: Ingresar nombre
   Escenario: Al confirmar empieza la partida sin mostrar la palabra
     Dado que el jugador está en la pantalla de inicio
     Cuando ingresa el nombre "Yamila"
+    Y elige el nivel "Fácil"
     Y confirma
     Entonces ve el saludo "Hola, Yamila"
     Y ve una palabra oculta

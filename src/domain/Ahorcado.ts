@@ -17,7 +17,11 @@ export class Ahorcado {
   private intentos = INTENTOS_INICIALES;
   private incorrectas: string[] = [];
 
-  constructor(private palabra: string) {}
+  constructor(private palabra: string, private nivel = "") {}
+
+  dificultad(): string {
+    return this.nivel;
+  }
 
   adivinar(letra: string): void {
     if (this.terminada()) return;
