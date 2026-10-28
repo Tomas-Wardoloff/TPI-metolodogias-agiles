@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { niveles, palabraPara, validarDificultad } from "../src/domain/dificultad"
+import { niveles, palabraAlAzar, palabraPara, validarDificultad } from "../src/domain/dificultad"
 
 it("los niveles son Facil, Medio y Dificil", () => {
     expect(niveles()).toEqual(["Fácil", "Medio", "Difícil"]);
@@ -24,4 +24,8 @@ it("medio con pick 0 devuelve CAMINO", () => {
 
 it("facil con pick 0 devuelve MURCIELAGO", () => {
   expect(palabraPara("facil", 0)).toBe("MURCIELAGO");
+});
+
+it("facil con el azar en 0 devuelve MURCIELAGO", () => {
+  expect(palabraAlAzar("facil", () => 0)).toBe("MURCIELAGO");
 });

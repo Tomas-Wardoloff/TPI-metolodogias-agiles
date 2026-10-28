@@ -27,3 +27,7 @@ export function palabraPara(dificultad: string, pick = 0): string {
   });
   return lista[pick] ?? "";
 }
+
+export function palabraAlAzar(dificultad: string, azar: () => number): string {
+  return "";
+}
