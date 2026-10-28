@@ -61,7 +61,7 @@ export function mountApp(root: HTMLElement, palabra: string): void {
     }
     const codigo =
       nivelElegido === "Fácil" ? "facil" : nivelElegido === "Medio" ? "medio" : "dificil";
-    const palabraPartida = codigo === "dificil" ? palabraPara(codigo, 0) : palabra;
+    const palabraPartida = palabraPara(codigo, 0);
     const tablero = document.createElement("div");
     root.appendChild(tablero);
     mountGame(tablero, palabraPartida, codigo, nivelElegido);
