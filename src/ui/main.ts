@@ -12,15 +12,17 @@ function obtenerSiguientePalabra(actual: string): string {
   return alternativas[0] ?? actual;
 }
 
-export function mountApp(root: HTMLElement, palabra: string): void {
-  let nivelElegido = "";
-  const botonesNiveles = niveles()
-    .map((nivel) => `<button type="button">${nivel}</button>`)
+export function mountApp(root: HTMLElement, _palabra: string): void {
+  const radiosNiveles = niveles()
+    .map(
+      (nivel) =>
+        `<label><input type="radio" name="dificultad" value="${nivel}" /> ${nivel}</label>`
+    )
     .join("");
 
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
-    ${botonesNiveles}
+    ${radiosNiveles}
     <button>Continuar</button>
     <p data-testid="aviso"></p>
     <p data-testid="saludo"></p>
@@ -33,12 +35,6 @@ export function mountApp(root: HTMLElement, palabra: string): void {
   const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
 
-  for (const botonNivel of root.querySelectorAll<HTMLButtonElement>("button[type='button']")) {
-    botonNivel.addEventListener("click", () => {
-      nivelElegido = botonNivel.textContent ?? "";
-    });
-  }
-
   boton.addEventListener("click", () => {
     const error = validarNombre(input.value);
     if (error) {
@@ -46,6 +42,8 @@ export function mountApp(root: HTMLElement, palabra: string): void {
       return;
     }
 
+    const elegido = root.querySelector<HTMLInputElement>('input[name="dificultad"]:checked');
+    const nivelElegido = elegido?.value ?? "";
     const errorNivel = validarDificultad(nivelElegido);
     if (errorNivel) {
       aviso.textContent = errorNivel;
@@ -56,8 +54,8 @@ export function mountApp(root: HTMLElement, palabra: string): void {
     saludo.textContent = `Hola, ${input.value}`;
     input.remove();
     boton.remove();
-    for (const botonNivel of root.querySelectorAll("button[type='button']")) {
-      botonNivel.remove();
+    for (const radio of root.querySelectorAll('input[name="dificultad"]')) {
+      radio.closest("label")?.remove();
     }
     const codigo =
       nivelElegido === "Fácil" ? "facil" : nivelElegido === "Medio" ? "medio" : "dificil";

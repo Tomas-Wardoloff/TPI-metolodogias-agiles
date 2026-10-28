@@ -12,7 +12,7 @@ When("ingresa el nombre {string}", async ({ page }, nombre: string) => {
 });
 
 When("elige el nivel {string}", async ({ page }, nivel: string) => {
-  await page.getByRole("button", { name: nivel }).click();
+  await page.getByRole("radio", { name: nivel }).click();
 });
 
 When("confirma", async ({ page }) => {
@@ -40,7 +40,7 @@ Then("no empieza la partida", async ({ page }) => {
 });
 
 Then("se ve el nivel {string}", async ({ page }, nivel: string) => {
-  await expect(page.getByRole("button", { name: nivel })).toBeVisible();
+  await expect(page.getByRole("radio", { name: nivel })).toBeVisible();
 });
 
 Then("se ve el radio {string}", async ({ page }, nivel: string) => {
