@@ -49,3 +49,20 @@ Característica: Elegir dificultad
     Y elige el nivel "Fácil"
     Y confirma
     Entonces se ve la palabra "_ _ _ _ _ _ _ _ _ _"
+
+  Escenario: Al jugar de nuevo se vuelven a ver los niveles
+    Dado que el jugador está en la pantalla de inicio
+    Cuando ingresa el nombre "Yamila"
+    Y elige el nivel "Difícil"
+    Y confirma
+    Y ingresa la letra "E"
+    Y ingresa la letra "I"
+    Y ingresa la letra "A"
+    Y ingresa la letra "U"
+    Y ingresa la letra "B"
+    Y ingresa la letra "X"
+    Entonces se ve "PERDISTE"
+    Cuando presiona "Jugar de nuevo"
+    Entonces se ve el radio "Fácil"
+    Y se ve el radio "Medio"
+    Y se ve el radio "Difícil"
