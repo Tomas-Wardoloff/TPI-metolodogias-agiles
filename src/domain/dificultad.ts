@@ -29,5 +29,5 @@ export function palabraPara(dificultad: string, pick = 0): string {
 }
 
 export function palabraAlAzar(dificultad: string, azar: () => number): string {
-  return "";
+  return palabraPara(dificultad, 0);
 }
