@@ -50,3 +50,7 @@ Then("se ve el radio {string}", async ({ page }, nivel: string) => {
 Then("queda guardado el nivel {string}", async ({ page }, nivel: string) => {
   await expect(page.getByTestId("dificultad")).toHaveText(nivel);
 });
+
+Given("que el jugador está en la pantalla de inicio con el azar en {string}", async ({ page }, azar: string) => {
+  await page.goto(`/?azar=${azar}`);
+});
