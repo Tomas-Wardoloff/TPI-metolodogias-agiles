@@ -1,4 +1,6 @@
 import { mountApp, mountGame } from "./ui/main";
+import "./ui/styles.css";
+
 
 const root = document.getElementById("app")!;
 const word = new URLSearchParams(window.location.search).get("word");

@@ -1,0 +1,360 @@
+:root {
+  --fondo: #f5f4f0;
+  --tarjeta: #ffffff;
+  --texto: #1c1c1c;
+  --suave: #8a8a85;
+  --borde: #e2e0da;
+  --rojo: #b3261e;
+  --verde: #2e6b3f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 48px 0 8px;
+}
+
+.instrucciones {
+  max-width: 420px;
+  margin: 0 0 32px;
+  color: var(--suave);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.85em;
+}
+
+#app {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 24px;
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Saludo */
+[data-testid="saludo"] {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 20px;
+}
+
+[data-testid="saludo"]:empty {
+  display: none;
+}
+
+/* Intentos: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo el número */
+[data-testid="intentos"] {
+  margin: 0;
+  color: var(--suave);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-testid="intentos"]::before {
+  content: "Intentos ";
+}
+
+/* Palabra oculta */
+[data-testid="word"] {
+  font-family: "Space Mono", monospace;
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+  margin: 24px 0 8px;
+  word-break: break-all;
+}
+
+/* Estado */
+[data-testid="status"] {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 16px 0 0;
+}
+
+[data-testid="status"].ganaste {
+  color: var(--verde);
+}
+
+[data-testid="status"].perdiste {
+  color: var(--rojo);
+}
+
+/* Campos de texto (los radios de dificultad tienen su propio estilo) */
+input[type="text"] {
+  width: 100%;
+  max-width: 240px;
+  font-family: inherit;
+  font-size: 1.2rem;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--texto);
+}
+
+/* Botón */
+button {
+  display: block;
+  margin: 16px auto 0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 28px;
+  border: 1px solid var(--texto);
+  border-radius: 6px;
+  background: var(--texto);
+  color: var(--tarjeta);
+  cursor: pointer;
+}
+
+button:hover {
+  background: #333;
+}
+
+/* Footer */
+.footer {
+  margin-top: auto;
+  padding: 32px 0 16px;
+  color: var(--suave);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.footer p {
+  margin: 4px 0;
+}
+
+/* Dibujo del ahorcado: la estructura se ve siempre y cada parte
+   aparece cuando el dominio la devuelve en dibujo() */
+.horca {
+  display: block;
+  width: 130px;
+  height: auto;
+  margin: 20px auto 0;
+  fill: none;
+  stroke: var(--texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.horca .estructura {
+  stroke: var(--suave);
+}
+
+.horca [data-parte] {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.horca [data-parte].visible {
+  opacity: 1;
+}
+
+.horca [data-parte].nueva {
+  animation: aparecer-parte 0.3s ease-out;
+}
+
+@keyframes aparecer-parte {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Al perder: ojos en X y el cuerpo se balancea desde la soga */
+.horca .ojos {
+  stroke-width: 2;
+  opacity: 0;
+}
+
+.horca.perdida .ojos {
+  opacity: 1;
+}
+
+.horca.perdida .cuerpo {
+  stroke: var(--rojo);
+  transform-box: view-box;
+  transform-origin: 85px 10px;
+  animation: balanceo 2.4s ease-in-out infinite;
+}
+
+@keyframes balanceo {
+  0%, 100% { transform: rotate(-5deg); }
+  50%      { transform: rotate(5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horca.perdida .cuerpo,
+  .horca [data-parte].nueva {
+    animation: none;
+  }
+}
+
+/* Oculta el texto a la vista pero lo deja para lectores de pantalla
+   (y para el AT de HU-J4, que compara este texto) */
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Puntaje: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo el número */
+[data-testid="puntaje"] {
+  margin: 12px 0 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+[data-testid="puntaje"]::before {
+  content: "Puntaje";
+  display: block;
+  color: var(--suave);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Avisos del nombre y de la letra */
+[data-testid="aviso"],
+[data-testid="aviso-letra"] {
+  margin: 8px 0 0;
+  color: var(--rojo);
+  font-size: 0.85rem;
+}
+
+[data-testid="aviso"]:empty,
+[data-testid="aviso-letra"]:empty {
+  display: none;
+}
+
+/* Letras incorrectas: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo las letras */
+[data-testid="letras-intentadas"] {
+  margin: 8px 0 20px;
+  font-family: "Space Mono", monospace;
+  color: var(--suave);
+  letter-spacing: 0.2em;
+}
+
+[data-testid="letras-intentadas"]::before {
+  content: "Letras usadas";
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-testid="letras-intentadas"]:empty {
+  display: none;
+}
+
+/* Niveles de dificultad: cada radio va dentro de su label,
+   que se dibuja como una opción; el radio sigue visible y clickeable */
+[data-testid="niveles"] {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+[data-testid="niveles"] label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+[data-testid="niveles"] label:hover {
+  border-color: var(--suave);
+}
+
+[data-testid="niveles"] label:has(input:checked) {
+  border-color: var(--texto);
+  font-weight: 500;
+}
+
+[data-testid="niveles"] input[type="radio"] {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  border: 1px solid var(--suave);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+[data-testid="niveles"] input[type="radio"]:checked {
+  border-color: var(--texto);
+  background: var(--texto);
+  box-shadow: inset 0 0 0 2px var(--tarjeta);
+}
+
+/* Dificultad elegida: la etiqueta se agrega con CSS,
+   así el texto del elemento sigue siendo solo el nivel */
+[data-testid="dificultad"] {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+[data-testid="dificultad"]::before {
+  content: "Dificultad ";
+  color: var(--suave);
+}
+
+[data-testid="dificultad"]:empty {
+  display: none;
+}
