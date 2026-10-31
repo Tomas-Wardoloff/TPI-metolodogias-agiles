@@ -98,12 +98,13 @@ export function mountGame(
 ): void {
   let palabraActual = palabra;
   const juego = new Ahorcado(palabraActual, codigo);
+  let partesDibujadas = 0;
 
   const dibujar = () => {
     const estado = juego.ganada()
-      ? `<p data-testid="status">GANASTE</p>`
+      ? `<p data-testid="status" class="ganaste">GANASTE</p>`
       : juego.perdida()
-        ? `<p data-testid="status">PERDISTE</p>`
+        ? `<p data-testid="status" class="perdiste">PERDISTE</p>`
         : "";
     const puntajeHtml = juego.terminada()
       ? `<p data-testid="puntaje">${juego.puntaje()}</p>`
@@ -119,9 +120,31 @@ export function mountGame(
     root.innerHTML = `
       <p data-testid="intentos">${juego.intentosRestantes()}</p>
       <p data-testid="dificultad"></p>
+      <svg class="horca${juego.perdida() ? " perdida" : ""}" viewBox="0 0 120 140" aria-hidden="true">
+        <g class="estructura">
+          <line x1="10" y1="130" x2="70" y2="130" />
+          <line x1="30" y1="130" x2="30" y2="10" />
+          <line x1="30" y1="10" x2="85" y2="10" />
+          <line x1="85" y1="10" x2="85" y2="28" />
+        </g>
+        <g class="cuerpo">
+          <circle data-parte="cabeza" cx="85" cy="40" r="12" />
+          <line data-parte="tronco" x1="85" y1="52" x2="85" y2="90" />
+          <line data-parte="brazo izquierdo" x1="85" y1="62" x2="70" y2="78" />
+          <line data-parte="brazo derecho" x1="85" y1="62" x2="100" y2="78" />
+          <line data-parte="pierna izquierda" x1="85" y1="90" x2="72" y2="115" />
+          <line data-parte="pierna derecha" x1="85" y1="90" x2="98" y2="115" />
+          <g class="ojos">
+            <line x1="78" y1="36" x2="82" y2="40" />
+            <line x1="82" y1="36" x2="78" y2="40" />
+            <line x1="88" y1="36" x2="92" y2="40" />
+            <line x1="92" y1="36" x2="88" y2="40" />
+          </g>
+        </g>
+      </svg>
       <p data-testid="word"></p>
       <p data-testid="letras-intentadas"></p>
-      <p data-testid="dibujo"></p>
+      <p data-testid="dibujo" class="solo-lectores"></p>
       ${estado}
       ${puntajeHtml}
       ${botonReiniciar}
@@ -135,6 +158,16 @@ export function mountGame(
       juego.letrasIncorrectas().join(" ");
     root.querySelector<HTMLElement>('[data-testid="dibujo"]')!.textContent =
       juego.dibujo().join(", ");
+
+    // Muestra en el SVG las partes que ya decidió el dominio;
+    // solo la parte recién agregada lleva la animación.
+    const partes = juego.dibujo();
+    partes.forEach((parte, i) => {
+      const elemento = root.querySelector(`[data-parte="${parte}"]`);
+      elemento?.classList.add("visible");
+      if (i >= partesDibujadas) elemento?.classList.add("nueva");
+    });
+    partesDibujadas = partes.length;
 
     const btnReiniciar = root.querySelector<HTMLButtonElement>('[data-testid="boton-reiniciar"]');
     if (btnReiniciar) {
@@ -151,6 +184,9 @@ export function mountGame(
 
     const input = root.querySelector("input");
     if (!input) return;
+    // Cada dibujar() crea un input nuevo: le devolvemos el foco
+    // para que el jugador pueda seguir escribiendo sin hacer clic.
+    input.focus();
     const avisoLetra = root.querySelector<HTMLElement>('[data-testid="aviso-letra"]')!;
     input.addEventListener("keydown", (evento) => {
       if (evento.key !== "Enter") return;
