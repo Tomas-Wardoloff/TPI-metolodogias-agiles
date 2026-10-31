@@ -8,15 +8,11 @@ export function validarDificultad(nivel: string): string | null {
 }
 
 export const PALABRAS = [
-  "SOL",
-  "GATO",
-  "PERRO",
-  "CAMINO",
-  "PLANETA",
-  "ESTRELLA",
-  "MURCIELAGO",
-  "COMPUTADORA",
-  "BIBLIOTECA",
+  "SOL", "GATO", "PERRO", "CAMINO", "PLANETA", "ESTRELLA",
+  "MURCIELAGO", "COMPUTADORA", "BIBLIOTECA",
+  "HIPOPOTAMO", "TELEVISION", "UNIVERSIDAD", "CHOCOLATE", "REFRIGERADOR",
+  "MARIPOSA", "ELEFANTE", "VENTANA", "GUITARRA", "CIUDAD",
+  "LUNA", "MESA", "FLOR", "LIBRO", "ZORRO", "KIWI",
 ];
 
 function palabrasDe(dificultad: string): string[] {
