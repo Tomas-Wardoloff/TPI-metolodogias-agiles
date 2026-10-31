@@ -40,6 +40,7 @@ export function mountApp(root: HTMLElement, azar: () => number): void {
   const aviso = root.querySelector<HTMLElement>('[data-testid="aviso"]')!;
   const saludo = root.querySelector<HTMLElement>('[data-testid="saludo"]')!;
   const cajaNiveles = root.querySelector<HTMLElement>('[data-testid="niveles"]')!;
+  let recientes: string[] = [];
 
   const empezar = (nivelVisible: string) => {
     root.querySelector("button")?.remove();
@@ -48,7 +49,9 @@ export function mountApp(root: HTMLElement, azar: () => number): void {
     const codigo = codigoDe(nivelVisible);
     const tablero = document.createElement("div");
     root.appendChild(tablero);
-    mountGame(tablero, palabraAlAzar(codigo, azar), codigo, nivelVisible, () => {
+    const palabra = palabraAlAzar(codigo, azar, recientes);
+    recientes = [palabra];
+    mountGame(tablero, palabra, codigo, nivelVisible, () => {
       tablero.remove();
       cajaNiveles.innerHTML = htmlRadios();
       const seguir = document.createElement("button");
