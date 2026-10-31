@@ -190,3 +190,11 @@ terminada sigue cubierto por los UT de la tabla.
 | CA-3 — el nivel elegido queda guardado        | `dificultad.feature`   | guarda facil de GATO; guarda dificil de PERRO                                | verde  |
 | CA-4 — Fácil 9 o más, Medio 6 a 8, Difícil 3 a 5 | `dificultad.feature` | palabraPara: SOL, CAMINO y MURCIELAGO                                        | verde  |
 | Al jugar de nuevo se elige otra vez y la palabra sale de ese nivel | `dificultad.feature` | — | verde |
+
+## HU-CP3 — Palabra aleatoria
+
+> Como jugador quiero que la palabra se elija al azar según el nivel, para que cada partida sea distinta.
+
+| Criterio | Escenario (AT) | Unit Tests | Estado |
+| -------- | -------------- | ---------- | ------ |
+| CA-1 — la palabra se elige al azar dentro del nivel elegido | `palabra-aleatoria.feature` | palabraAlAzar: azar 0 devuelve MURCIELAGO; azar 0.2 devuelve COMPUTADORA; azar 0.99 devuelve REFRIGERADOR | verde |

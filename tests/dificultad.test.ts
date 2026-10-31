@@ -30,6 +30,10 @@ it("facil con el azar en 0 devuelve MURCIELAGO", () => {
   expect(palabraAlAzar("facil", () => 0)).toBe("MURCIELAGO");
 });
 
-it("facil con el azar en 0.5 devuelve COMPUTADORA", () => {
-  expect(palabraAlAzar("facil", () => 0.5)).toBe("COMPUTADORA");
+it("facil con el azar en 0.2 devuelve COMPUTADORA", () => {
+  expect(palabraAlAzar("facil", () => 0.2)).toBe("COMPUTADORA");
+});
+
+it("facil con el azar en 0.99 devuelve REFRIGERADOR", () => {
+  expect(palabraAlAzar("facil", () => 0.99)).toBe("REFRIGERADOR");
 });
