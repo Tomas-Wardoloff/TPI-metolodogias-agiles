@@ -1,10 +1,12 @@
 import { mountApp, mountGame } from "./ui/main";
 
 const root = document.getElementById("app")!;
-const word = new URLSearchParams(window.location.search).get("word");
+const params = new URLSearchParams(window.location.search);
+const word = params.get("word");
+const azarFijo = params.get("azar");
 
 if (word) {
   mountGame(root, word);
 } else {
-  mountApp(root, "GATO");
+  mountApp(root, azarFijo === null ? Math.random : () => Number(azarFijo));
 }

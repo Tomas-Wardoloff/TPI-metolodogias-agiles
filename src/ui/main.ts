@@ -1,7 +1,7 @@
 import { Ahorcado } from "../domain/Ahorcado";
 import { validarNombre } from "../domain/nombre";
 import { validarLetra } from "../domain/letra";
-import { niveles, palabraPara, validarDificultad } from "../domain/dificultad";
+import { niveles, palabraAlAzar, validarDificultad } from "../domain/dificultad";
 
 const PALABRAS_DISPONIBLES = ["GATO", "PERRO", "CASA", "ARBOL"];
 
@@ -27,7 +27,7 @@ function codigoDe(nivel: string): string {
   return "dificil";
 }
 
-export function mountApp(root: HTMLElement, _palabra: string): void {
+export function mountApp(root: HTMLElement, azar: () => number): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
     <div data-testid="niveles">${htmlRadios()}</div>
@@ -48,7 +48,7 @@ export function mountApp(root: HTMLElement, _palabra: string): void {
     const codigo = codigoDe(nivelVisible);
     const tablero = document.createElement("div");
     root.appendChild(tablero);
-    mountGame(tablero, palabraPara(codigo, 0), codigo, nivelVisible, () => {
+    mountGame(tablero, palabraAlAzar(codigo, azar), codigo, nivelVisible, () => {
       tablero.remove();
       cajaNiveles.innerHTML = htmlRadios();
       const seguir = document.createElement("button");

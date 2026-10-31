@@ -4,7 +4,7 @@ import { createBdd } from "playwright-bdd";
 const { Given, When, Then } = createBdd();
 
 Given("que el jugador está en la pantalla de inicio", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?azar=0");
 });
 
 When("ingresa el nombre {string}", async ({ page }, nombre: string) => {
