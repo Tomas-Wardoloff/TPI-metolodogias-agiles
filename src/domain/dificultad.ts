@@ -27,7 +27,7 @@ export function palabraPara(dificultad: string, pick = 0): string {
   return palabrasDe(dificultad)[pick] ?? "";
 }
 
-export function palabraAlAzar(dificultad: string, azar: () => number): string {
+export function palabraAlAzar(dificultad: string, azar: () => number, recientes: string[] = []): string {
   const lista = palabrasDe(dificultad);
   return lista[Math.floor(azar() * lista.length)];
 }
