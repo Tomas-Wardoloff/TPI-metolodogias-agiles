@@ -57,6 +57,7 @@ kbd {
   border: 1px solid var(--borde);
   border-radius: 8px;
   text-align: center;
+  container-type: inline-size;
 }
 
 /* Saludo */
@@ -88,10 +89,13 @@ kbd {
 /* Palabra oculta */
 [data-testid="word"] {
   font-family: "Space Mono", monospace;
-  font-size: 2.2rem;
+  /* Cada carácter ocupa ~0.9em (0.6em de la letra + 0.3em de espacio),
+     así que el ancho de la tarjeta (100cqi) dividido por la cantidad de
+     caracteres da el tamaño máximo para que entre en un solo renglón. */
+  font-size: min(2.2rem, calc(100cqi / (var(--caracteres, 10) * 0.95)));
   letter-spacing: 0.3em;
   margin: 24px 0 8px;
-  word-break: break-all;
+  white-space: nowrap;
 }
 
 /* Estado */

@@ -152,8 +152,11 @@ export function mountGame(
     `;
 
     root.querySelector<HTMLElement>('[data-testid="dificultad"]')!.textContent = nivelVisible;
-    root.querySelector<HTMLElement>('[data-testid="word"]')!.textContent =
-      juego.palabraEnmascarada();
+    // El CSS usa la cantidad de caracteres para achicar la letra
+    // y que la palabra entre siempre en un solo renglón.
+    const palabraEnPantalla = root.querySelector<HTMLElement>('[data-testid="word"]')!;
+    palabraEnPantalla.textContent = juego.palabraEnmascarada();
+    palabraEnPantalla.style.setProperty("--caracteres", String(palabraEnPantalla.textContent.length));
     root.querySelector<HTMLElement>('[data-testid="letras-intentadas"]')!.textContent =
       juego.letrasIncorrectas().join(" ");
     root.querySelector<HTMLElement>('[data-testid="dibujo"]')!.textContent =
