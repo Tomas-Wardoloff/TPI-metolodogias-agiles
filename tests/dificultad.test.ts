@@ -46,3 +46,6 @@ it("facil con el azar en 0 y COMPUTADORA reciente devuelve MURCIELAGO", () => {
   expect(palabraAlAzar("facil", () => 0, ["COMPUTADORA"])).toBe("MURCIELAGO");
 });
 
+it("un nivel elegido no devuelve aviso", () => {
+  expect(validarDificultad("Fácil")).toBeNull();
+});
