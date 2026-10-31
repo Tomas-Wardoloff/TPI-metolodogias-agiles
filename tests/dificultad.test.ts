@@ -41,3 +41,8 @@ it("facil con el azar en 0.99 devuelve REFRIGERADOR", () => {
 it("facil con el azar en 0 y MURCIELAGO reciente devuelve COMPUTADORA", () => {
   expect(palabraAlAzar("facil", () => 0, ["MURCIELAGO"])).toBe("COMPUTADORA");
 });
+
+it("facil con el azar en 0 y COMPUTADORA reciente devuelve MURCIELAGO", () => {
+  expect(palabraAlAzar("facil", () => 0, ["COMPUTADORA"])).toBe("MURCIELAGO");
+});
+
