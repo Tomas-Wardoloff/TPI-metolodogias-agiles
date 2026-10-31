@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Instalar dependencias
-        run: npm install
+        run: npm ci
 
       - name: Validar compilación (Build)
         # Usamos npx tsc porque en tu package.json no hay un script "build"
