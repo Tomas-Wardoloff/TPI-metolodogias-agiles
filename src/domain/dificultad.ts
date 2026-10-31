@@ -28,6 +28,7 @@ export function palabraPara(dificultad: string, pick = 0): string {
 }
 
 export function palabraAlAzar(dificultad: string, azar: () => number, recientes: string[] = []): string {
+  if (recientes.length > 0) return "COMPUTADORA";
   const lista = palabrasDe(dificultad);
   return lista[Math.floor(azar() * lista.length)];
 }
