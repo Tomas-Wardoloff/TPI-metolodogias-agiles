@@ -198,3 +198,4 @@ terminada sigue cubierto por los UT de la tabla.
 | Criterio | Escenario (AT) | Unit Tests | Estado |
 | -------- | -------------- | ---------- | ------ |
 | CA-1 — la palabra se elige al azar dentro del nivel elegido | `palabra-aleatoria.feature` | palabraAlAzar: azar 0 devuelve MURCIELAGO; azar 0.2 devuelve COMPUTADORA; azar 0.99 devuelve REFRIGERADOR | verde |
+| CA-2 — la palabra no se repite en la partida siguiente | `palabra-aleatoria.feature` | palabraAlAzar: con MURCIELAGO reciente devuelve COMPUTADORA; con COMPUTADORA reciente devuelve MURCIELAGO | verde |
