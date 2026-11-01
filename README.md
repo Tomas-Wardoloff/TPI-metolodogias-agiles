@@ -2,7 +2,7 @@
 
 Juego del Ahorcado en el navegador, desarrollado con TDD (unit tests del dominio) y ATDD (acceptance tests en Gherkin sobre la app real), con integración continua en GitHub Actions.
 
-- **App en producción:** _pendiente de deploy_
+- **App en producción:** https://tomas-wardoloff.github.io/TPI-metolodogias-agiles/
 - **Story Map / historias de usuario:** https://miro.com/app/board/uXjVHsffG1k=/
 - **Trazabilidad Historia → criterio → escenario (AT) → unit tests:** ver [NOTES.md](NOTES.md)
 
@@ -43,4 +43,4 @@ Los acceptance tests fijan la palabra y el azar por URL: `/?word=GATO` arranca u
 
 - Un commit por transición de test: `RED:` (test que falla), `GREEN:` (código mínimo que lo hace pasar) y `REFACTOR:` cuando corresponde.
 - Cada integrante arranca sus tests con su propia identidad de git.
-- El pipeline (`.github/workflows/CI.yml`) corre en cada push: build, unit tests con cobertura y acceptance tests.
+- El pipeline (`.github/workflows/CI.yml`) corre en cada push: compilación, unit tests con cobertura, acceptance tests y análisis estático (CodeQL). El deploy a GitHub Pages corre solo si esas etapas pasan.
