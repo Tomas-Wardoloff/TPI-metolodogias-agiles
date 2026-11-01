@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+
 jobs:
   integracion-continua:
     runs-on: ubuntu-latest
@@ -23,15 +26,72 @@ jobs:
         run: npm ci
 
       - name: Validar compilación (Build)
-        # Usamos npx tsc porque en tu package.json no hay un script "build"
+        # tsc es la compilación. No cuenta como análisis estático.
         run: npx tsc
+
+      - name: Build de producción
+        run: npm run build
 
       - name: Ejecutar Unit Tests y Coverage (90%)
         run: npx vitest run --coverage
 
       - name: Instalar navegadores de Playwright
-        # Playwright necesita descargar Chromium para correr las pruebas en la nube
         run: npx playwright install --with-deps
 
       - name: Ejecutar Acceptance Tests
         run: npm run at
+
+  analisis-estatico:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Inicializar CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          build-mode: none
+
+      - name: Analizar con CodeQL
+        uses: github/codeql-action/analyze@v3
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [integracion-continua, analisis-estatico]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Build de producción
+        run: npm run build
+
+      - name: Subir el sitio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
