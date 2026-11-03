@@ -12,6 +12,7 @@ Característica: Elegir dificultad
     Y se ve el nivel "Medio"
     Y se ve el nivel "Difícil"
 
+  @CA-1
   Escenario: Los niveles son radios
     Dado que el jugador está en la pantalla de inicio
     Entonces se ve el radio "Fácil"
@@ -50,6 +51,7 @@ Característica: Elegir dificultad
     Y confirma
     Entonces se ve la palabra "_ _ _ _ _ _ _ _ _ _"
 
+  @CA-5
   Escenario: Al jugar de nuevo se vuelven a ver los niveles
     Dado que el jugador está en la pantalla de inicio
     Cuando ingresa el nombre "Yamila"
@@ -67,6 +69,7 @@ Característica: Elegir dificultad
     Y se ve el radio "Medio"
     Y se ve el radio "Difícil"
 
+  @CA-5
   Escenario: Al jugar de nuevo la dificultad nueva cambia la palabra
     Dado que el jugador está en la pantalla de inicio
     Cuando ingresa el nombre "Yamila"

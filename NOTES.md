@@ -130,6 +130,7 @@ Esa regla quedó en HU-J6.
 | CA-2 — un número muestra un aviso y no resta  | `validar-entrada.feature` | validarLetra: un número devuelve el aviso; otro número devuelve el aviso | verde  |
 | CA-3 — un símbolo muestra un aviso y no resta | `validar-entrada.feature` | validarLetra: un símbolo devuelve el aviso | verde  |
 | CA-4 — confirmar sin escribir muestra un aviso | `validar-entrada.feature` | validarLetra: vacío devuelve el aviso | verde  |
+| CA-5 — más de una letra muestra un aviso y no resta | `validar-entrada.feature` | validarLetra: más de una letra devuelve el aviso | verde  |
 
 ---
 
@@ -179,11 +180,11 @@ terminada sigue cubierto por los UT de la tabla.
 
 | Criterio                                      | Escenario (AT)         | Unit Tests                                                                 | Estado |
 | --------------------------------------------- | ---------------------- | -------------------------------------------------------------------------- | ------ |
-| CA-1 — se muestran Fácil, Medio y Difícil     | `dificultad.feature`   | niveles son Facil, Medio y Dificil                                         | verde  |
+| CA-1 — se muestran Fácil, Medio y Difícil, como radios | `dificultad.feature`   | niveles son Facil, Medio y Dificil                                | verde  |
 | CA-2 — sin nivel, aviso y no avanza           | `dificultad.feature`   | validarDificultad: vacío devuelve el aviso; solo espacios devuelve el aviso | verde  |
 | CA-3 — el nivel elegido queda guardado        | `dificultad.feature`   | guarda facil de GATO; guarda dificil de PERRO                                | verde  |
 | CA-4 — Fácil 9 o más, Medio 6 a 8, Difícil 3 a 5 | `dificultad.feature` | palabraPara: SOL, CAMINO y MURCIELAGO                                        | verde  |
-| Al jugar de nuevo se elige otra vez y la palabra sale de ese nivel | `dificultad.feature` | — | verde |
+| CA-5 — al jugar de nuevo se elige otra vez el nivel y la palabra sale de ese nivel | `dificultad.feature` | — (la UI vuelve a mostrar los niveles y usa `palabraAlAzar`, ya cubierta por los UT de CA-4 y HU-CP3) | verde |
 
 ## HU-CP3 — Palabra aleatoria
 

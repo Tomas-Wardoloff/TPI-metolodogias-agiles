@@ -44,4 +44,4 @@ Los acceptance tests fijan la palabra y el azar por URL: `/?word=GATO` arranca u
 
 - Un commit por transición de test: `RED:` (test que falla), `GREEN:` (código mínimo que lo hace pasar) y `REFACTOR:` cuando corresponde.
 - Cada integrante arranca sus tests con su propia identidad de git.
-- El pipeline (`.github/workflows/CI.yml`) corre en cada push: compilación, unit tests con cobertura, acceptance tests y análisis estático (CodeQL). El deploy a GitHub Pages corre solo si esas etapas pasan.
+- El pipeline (`.github/workflows/CI.yml`) corre en cada push: compilación, unit tests con cobertura (el reporte queda en el summary del run y como artifact), acceptance tests y análisis estático con Biome como quality gate, más CodeQL para seguridad. El deploy a GitHub Pages corre solo si esas etapas pasan. Las evidencias de que la coverage y el análisis estático cortan el pipeline están en [NOTES.md](NOTES.md#evidencias-de-corte).
