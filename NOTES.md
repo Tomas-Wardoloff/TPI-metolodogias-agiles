@@ -235,5 +235,10 @@ código acaba de crear con `innerHTML`.
 
 | Qué se probó | Cómo | Run |
 | ------------ | ---- | --- |
-| La coverage corta | Un archivo de `src/domain/` sin tests baja la coverage del 90%: falla `integracion-continua` y el deploy queda en *skipped*. | _pendiente: link del run_ |
-| El análisis estático corta | Una variable sin usar en `src/domain/`: Biome falla, falla `analisis-estatico` y el deploy queda en *skipped*. | _pendiente: link del run_ |
+| La coverage corta | `src/domain/evidenciaCoverage.ts`, tres funciones sin tests, baja la coverage a 86%: falla `integracion-continua` (exit 1), `analisis-estatico` pasa y el deploy queda en *skipped*. Rama `evidencia-coverage`, PR #2, cerrado sin mergear. | [run 41707371650](https://github.com/Tomas-Wardoloff/TPI-metolodogias-agiles/actions/runs/41707371650) |
+| El análisis estático corta | `src/domain/evidenciaLint.ts`, una variable sin usar (`noUnusedVariables`): falla `analisis-estatico` (exit 1), `integracion-continua` pasa y el deploy queda en *skipped*. Rama `evidencia-lint`, PR #3, cerrado sin mergear. | [run 41708542761](https://github.com/Tomas-Wardoloff/TPI-metolodogias-agiles/actions/runs/41708542761) |
+
+Las evidencias se hicieron en pull requests para que `main` nunca quede en
+rojo. En un PR el job `deploy` además tiene `if:` (solo despliega en push a
+`main`), pero el corte lo muestra el job fallado: el deploy depende de los dos
+jobs por `needs:`.
