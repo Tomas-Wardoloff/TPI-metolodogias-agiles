@@ -181,16 +181,6 @@ it("después de ganar un fallo no resta intentos", () => {
   expect(juego.intentosRestantes()).toBe(6);
 });
 
-it("después de ganar un fallo no resta intentos", () => {
-  const juego = new Ahorcado("GATO");
-  juego.adivinar("G");
-  juego.adivinar("A");
-  juego.adivinar("T");
-  juego.adivinar("O");
-  juego.adivinar("Z");
-  expect(juego.intentosRestantes()).toBe(6);
-});
-
 it("reiniciar restablece intentos y letras incorrectas", () => {
   const juego = new Ahorcado("GATO");
   juego.adivinar("X");
