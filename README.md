@@ -19,7 +19,7 @@ Juego del Ahorcado en el navegador, desarrollado con TDD (unit tests del dominio
 src/
   domain/      lógica del juego, sin DOM (Ahorcado, nombre, letra, dificultad)
   ui/          pantalla: lee el input y muestra el estado
-  index.ts     arranque: lee ?word= y ?azar= (solo para tests) y monta la app
+  index.ts     arranque: lee ?word= y ?posicion= (solo para tests) y monta la app
 tests/         unit tests del dominio (Vitest)
 features/      acceptance tests en Gherkin (.feature) y sus steps (Playwright + playwright-bdd)
 ```
@@ -37,7 +37,7 @@ npm run at                  # acceptance tests contra la app real
 npx tsc --noEmit            # compilación / chequeo de tipos
 ```
 
-Los acceptance tests fijan la palabra y el azar por URL: `/?word=GATO` arranca una partida con esa palabra, y `/?azar=0` hace que el sorteo elija siempre la primera palabra del nivel.
+Los acceptance tests fijan la palabra y el azar por URL: `/?word=GATO` arranca una partida con esa palabra, y `/?posicion=0` hace que el sorteo elija siempre la primera palabra del nivel.
 
 ## Método de trabajo
 

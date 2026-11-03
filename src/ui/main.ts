@@ -27,7 +27,7 @@ function codigoDe(nivel: string): string {
   return "dificil";
 }
 
-export function mountApp(root: HTMLElement, azar: () => number): void {
+export function mountApp(root: HTMLElement, elegirPosicion: (cantidad: number) => number): void {
   root.innerHTML = `
     <input data-testid="input-nombre" type="text" />
     <div data-testid="niveles">${htmlRadios()}</div>
@@ -49,7 +49,7 @@ export function mountApp(root: HTMLElement, azar: () => number): void {
     const codigo = codigoDe(nivelVisible);
     const tablero = document.createElement("div");
     root.appendChild(tablero);
-    const palabra = palabraAlAzar(codigo, azar, recientes);
+    const palabra = palabraAlAzar(codigo, elegirPosicion, recientes);
     recientes = [palabra];
     mountGame(tablero, palabra, codigo, nivelVisible, () => {
       tablero.remove();

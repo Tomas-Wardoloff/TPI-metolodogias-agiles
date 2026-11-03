@@ -26,23 +26,23 @@ it("facil con pick 0 devuelve MURCIELAGO", () => {
   expect(palabraPara("facil", 0)).toBe("MURCIELAGO");
 });
 
-it("facil con el azar en 0 devuelve MURCIELAGO", () => {
+it("facil en la primera posicion devuelve MURCIELAGO", () => {
   expect(palabraAlAzar("facil", () => 0)).toBe("MURCIELAGO");
 });
 
-it("facil con el azar en 0.2 devuelve COMPUTADORA", () => {
-  expect(palabraAlAzar("facil", () => 0.2)).toBe("COMPUTADORA");
+it("facil en la segunda posicion devuelve COMPUTADORA", () => {
+  expect(palabraAlAzar("facil", () => 1)).toBe("COMPUTADORA");
 });
 
-it("facil con el azar en 0.99 devuelve REFRIGERADOR", () => {
-  expect(palabraAlAzar("facil", () => 0.99)).toBe("REFRIGERADOR");
+it("facil en la ultima posicion devuelve REFRIGERADOR", () => {
+  expect(palabraAlAzar("facil", (cantidad) => cantidad - 1)).toBe("REFRIGERADOR");
 });
 
-it("facil con el azar en 0 y MURCIELAGO reciente devuelve COMPUTADORA", () => {
+it("facil en la primera posicion y MURCIELAGO reciente devuelve COMPUTADORA", () => {
   expect(palabraAlAzar("facil", () => 0, ["MURCIELAGO"])).toBe("COMPUTADORA");
 });
 
-it("facil con el azar en 0 y COMPUTADORA reciente devuelve MURCIELAGO", () => {
+it("facil en la primera posicion y COMPUTADORA reciente devuelve MURCIELAGO", () => {
   expect(palabraAlAzar("facil", () => 0, ["COMPUTADORA"])).toBe("MURCIELAGO");
 });
 

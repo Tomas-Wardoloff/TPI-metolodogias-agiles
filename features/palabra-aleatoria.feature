@@ -7,7 +7,7 @@ Característica: Palabra aleatoria
 
   @CA-1
   Escenario: La palabra se elige al azar dentro del nivel
-    Dado que el jugador está en la pantalla de inicio con el azar en "0.2"
+    Dado que el jugador está en la pantalla de inicio y el sorteo elige la palabra número 2 del nivel
     Cuando ingresa el nombre "Yamila"
     Y elige el nivel "Fácil"
     Y confirma

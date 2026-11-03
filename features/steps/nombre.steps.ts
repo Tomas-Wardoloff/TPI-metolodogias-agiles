@@ -4,7 +4,7 @@ import { createBdd } from "playwright-bdd";
 const { Given, When, Then } = createBdd();
 
 Given("que el jugador está en la pantalla de inicio", async ({ page }) => {
-  await page.goto("/?azar=0");
+  await page.goto("/?posicion=0");
 });
 
 When("ingresa el nombre {string}", async ({ page }, nombre: string) => {
@@ -51,6 +51,6 @@ Then("queda guardado el nivel {string}", async ({ page }, nivel: string) => {
   await expect(page.getByTestId("dificultad")).toHaveText(nivel);
 });
 
-Given("que el jugador está en la pantalla de inicio con el azar en {string}", async ({ page }, azar: string) => {
-  await page.goto(`/?azar=${azar}`);
+Given("que el jugador está en la pantalla de inicio y el sorteo elige la palabra número {int} del nivel", async ({ page }, numero: number) => {
+  await page.goto(`/?posicion=${numero - 1}`);
 });
