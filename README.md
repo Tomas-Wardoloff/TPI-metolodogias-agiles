@@ -35,6 +35,7 @@ npx vitest run              # unit tests
 npx vitest run --coverage   # unit tests + cobertura (umbral 90% sobre src/domain)
 npm run at                  # acceptance tests contra la app real
 npx tsc --noEmit            # compilación / chequeo de tipos
+npm run lint                # análisis estático con Biome (falla ante cualquier hallazgo)
 ```
 
 Los acceptance tests fijan la palabra y el azar por URL: `/?word=GATO` arranca una partida con esa palabra, y `/?posicion=0` hace que el sorteo elija siempre la primera palabra del nivel.

@@ -79,6 +79,21 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      # Quality gate: --error-on-warnings hace que cualquier hallazgo termine
+      # con exit 1, el job falla y el deploy (needs:) no corre.
+      - name: Quality gate con Biome (linter)
+        run: npm run lint
+
+      # CodeQL publica hallazgos de seguridad en GitHub, pero no corta el job:
+      # el corte lo da el paso anterior.
       - name: Inicializar CodeQL
         uses: github/codeql-action/init@v3
         with:
