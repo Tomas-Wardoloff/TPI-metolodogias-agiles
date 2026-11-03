@@ -8,6 +8,18 @@ a la historia en los mensajes de commit.
 
 Story Map: https://miro.com/app/board/uXjVHsffG1k=/
 
+## Aprobación directa — funcionalidades extra
+
+Las 4 funcionalidades extra siguen el mismo proceso que el resto: historia,
+AT en rojo, unit tests rojo → verde y la misma trazabilidad.
+
+| Extra | Historia | Escenario (AT) |
+| ----- | -------- | -------------- |
+| Elegir dificultad | HU-CP2 | `dificultad.feature` |
+| Jugar de nuevo | HU-RE1 | `reiniciar.feature` |
+| Dibujo del ahorcado | HU-J4 | `dibujo.feature` |
+| Cálculo del puntaje | HU-VP1 | `puntaje.feature` |
+
 ---
 
 ## HU-RI1 — Ingresar nombre
@@ -181,3 +193,47 @@ terminada sigue cubierto por los UT de la tabla.
 | -------- | -------------- | ---------- | ------ |
 | CA-1 — la palabra se elige al azar dentro del nivel elegido | `palabra-aleatoria.feature` | palabraAlAzar: primera posición devuelve MURCIELAGO; segunda posición devuelve COMPUTADORA; última posición devuelve REFRIGERADOR | verde |
 | CA-2 — la palabra no se repite en la partida siguiente | `palabra-aleatoria.feature` | palabraAlAzar: primera posición con MURCIELAGO reciente devuelve COMPUTADORA; primera posición con COMPUTADORA reciente devuelve MURCIELAGO | verde |
+
+**Corrección (CA-1), por la devolución del 2/11:** los primeros tests fijaban
+el azar con un número (`() => 0.5`) y la palabra esperada dependía de cuántas
+palabras tenía la lista. En el GREEN `775bd0b` (REFRIGERADOR) se agregaron
+palabras, se corrieron las posiciones y, para seguir en verde, se cambió lo
+esperado de un test que ya andaba (0.5 → 0.2, en el UT y en el `.feature`).
+Eso no se hace en un GREEN: el GREEN solo toca el código.
+
+Lo correcto era primero un `REFACTOR:` para que el test no dependa del largo
+de la lista y después el RED de REFRIGERADOR. Lo arreglamos hacia adelante en
+`REFACTOR: palabraAlAzar elige por posicion y no depende del largo de la lista`:
+`palabraAlAzar` recibe una función que devuelve la posición (`cantidad => 0`,
+`() => 1`, `cantidad => cantidad - 1`), los AT fijan la palabra con `?posicion=`
+y lo esperado no cambió. Ahora agregar palabras al final de la lista no rompe
+ningún test.
+
+---
+
+## Pipeline CI/CD
+
+`.github/workflows/CI.yml` corre en cada push y pull request a `main`, con tres jobs:
+
+| Job | Etapas | Cómo corta |
+| --- | ------ | ---------- |
+| `integracion-continua` | Build (`tsc` + `vite build`) → Unit tests + coverage → AT | Cada paso que termina con exit ≠ 0 corta el job. La coverage corta por `coverage.thresholds` (90%) en `vitest.config.ts`, medida solo sobre `src/domain/`. |
+| `analisis-estatico` | Quality gate con Biome (`npm run lint`) → CodeQL | `biome lint --error-on-warnings`: cualquier hallazgo termina con exit 1. CodeQL publica hallazgos de seguridad pero no corta. |
+| `deploy` | Build → GitHub Pages | `needs: [integracion-continua, analisis-estatico]`: si alguno falla, el deploy queda en *skipped*. |
+
+**Publicación de la coverage:** el resumen queda en el *summary* de cada run y
+el reporte HTML completo se sube como artifact `coverage-report`, también
+cuando la coverage baja del umbral.
+
+**Por qué Biome y no ESLint:** `typescript-eslint` todavía no soporta
+TypeScript 7, que es la versión del proyecto. Biome trae su propio parser de
+TypeScript. Usamos sus reglas recomendadas y apagamos `noNonNullAssertion`,
+una regla de estilo: los `!` de la UI están sobre elementos que el mismo
+código acaba de crear con `innerHTML`.
+
+### Evidencias de corte
+
+| Qué se probó | Cómo | Run |
+| ------------ | ---- | --- |
+| La coverage corta | Un archivo de `src/domain/` sin tests baja la coverage del 90%: falla `integracion-continua` y el deploy queda en *skipped*. | _pendiente: link del run_ |
+| El análisis estático corta | Una variable sin usar en `src/domain/`: Biome falla, falla `analisis-estatico` y el deploy queda en *skipped*. | _pendiente: link del run_ |
